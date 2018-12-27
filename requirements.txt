@@ -1,0 +1,9 @@
+tweepy
+textblob
+pip
+numpy
+gensim
+spacy
+nltk
+jellyfish
+psycopg2

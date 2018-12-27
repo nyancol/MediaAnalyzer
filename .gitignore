@@ -3,6 +3,9 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+# API keys
+media_analyzer/api_keys.ini
+
 # C extensions
 *.so
 
@@ -102,3 +105,4 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+.gitsecret/keys/random_seed

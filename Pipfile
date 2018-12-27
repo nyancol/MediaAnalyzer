@@ -1,0 +1,22 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+tweepy = "*"
+textblob = "*"
+pip = "==18.0"
+numpy = "*"
+gensim = "*"
+spacy = "*"
+nltk = "*"
+jellyfish = "*"
+"psycopg2" = "*"
+flask = "*"
+
+[dev-packages]
+pytest = "*"
+
+[requires]
+python_version = "3.6"
