@@ -35,17 +35,23 @@ def connection():
 
 
 def create_tables():
-    commands = ["""
-    CREATE TABLE tweets (
-        id bigint PRIMARY KEY,
-        publisher varchar (25) NOT NULL,
-        language varchar (20) NOT NULL,
-        created_at timestamp NOT NULL,
-        text varchar (300) NOT NULL,
-        topics varchar[],
-        negative float NOT NULL, 
-        neutral float NOT NULL, 
-        positive float NOT NULL
+    commands = [
+    # """
+    # CREATE TABLE tweets (
+    #     id bigint PRIMARY KEY,
+    #     publisher varchar (25) NOT NULL,
+    #     language varchar (20) NOT NULL,
+    #     created_at timestamp NOT NULL,
+    #     text varchar (300) NOT NULL,
+    #     topics varchar[],
+    #     negative float NOT NULL, 
+    #     neutral float NOT NULL, 
+    #     positive float NOT NULL
+    # );
+    # """,
+    """
+    CREATE TABLE topics (
+        topic varchar (25) PRIMARY KEY
     );
     """,
     ]
@@ -58,8 +64,20 @@ def create_tables():
         conn.commit()
 
 
+def populate_tables():
+    config = ConfigParser()
+    config.read("media_analyzer/core/topics.ini")
+    topics = [{"topic": topic} for topic in config.sections()]
+    sql = """INSERT INTO topics (topic) VALUES (%(topic)s);"""
+    with connection() as conn:
+        cur = conn.cursor()
+        cur.executemany(sql, topics)
+        cur.close()
+        conn.commit()
+
+
 def drop_tables():
-    tables = ["tweets"]
+    tables = ["tweets", "topics"]
     with connection() as conn:
         cur = conn.cursor()
         for table in tables:
@@ -78,7 +96,7 @@ def get_publishers():
 
 
 def get_languages():
-    with database.connection() as conn:
+    with connection() as conn:
         cur = conn.cursor()
         cur.execute("SELECT DISTINCT language FROM tweets;")
         rows = cur.fetchall()
@@ -94,7 +112,7 @@ def load_tweets(publisher=None, language=None):
         if publisher:
             conditions.append(f"publisher = '{publisher}'")
         if language:
-            conditions.append(f"publisher = '{publisher}'")
+            conditions.append(f"language = '{language}'")
 
         if publisher or language:
             cur.execute(f"{sql} WHERE {' AND '.join(conditions)};")
@@ -141,3 +159,4 @@ def update_sentiment(tweets):
 if __name__ == "__main__":
     drop_tables()
     create_tables()
+    populate_tables()

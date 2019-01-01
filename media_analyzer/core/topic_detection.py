@@ -10,18 +10,7 @@ from media_analyzer import database
 
 
 def tokenize(text, parser):
-    lda_tokens = []
-    tokens = parser(text)
-    for token in tokens:
-        if token.orth_.isspace():
-            continue
-        elif token.like_url:
-            lda_tokens.append('URL')
-        elif token.orth_.startswith('@'):
-            lda_tokens.append('SCREEN_NAME')
-        else:
-            lda_tokens.append(token.lower_)
-    return lda_tokens
+    return [word.lemma_ for word in parser(text.lower())]
 
 
 def load_topics(language):
@@ -50,44 +39,35 @@ def analyze(tokens, topics):
 def update():
     languages = database.get_languages()
     for language in languages:
+        print(f"Updating {language}")
         tweets = database.load_tweets(language=language)
         tweets = run(tweets, language)
+        print(f"Finished updating {language}")
         database.update_topics(tweets)
 
 
+def clean_tokens(tokens, stop_words):
+    return list(filter(lambda token: token not in stop_words, tokens))
+
+
+def get_parser(language):
+    parsers = {
+               "english": "en",
+               "french": "fr",
+               "spanish": "es",
+               "italian": "it",
+              }
+    return spacy.load(parsers[language])
+
+
 def run(tweets, language):
-    def get_parser(language):
-        parsers = {
-                   "english": "en",
-                   "french": "fr",
-                   "spanish": "es",
-                  }
-        spacy.load(parsers[language])
-        return eval(f"spacy.lang.{parsers[language]}.{language.title()}")()
-
-    def get_stemmer():
-        return lambda word: SnowballStemmer(language).stem(word)
-
-    def get_lemma_2(word):
-        lemmatizer = WordNetLemmatizer()
-        return lambda word: lemmatizer.lemmatize(word, pos='v')
-
-    def get_lemma(word):
-        lemma = wn.morphy(word)
-        if lemma is None:
-            return word
-        else:
-            return lemma
-
     topics = load_topics(language)
     parser = get_parser(language)
-    stemmer = get_stemmer()
     stop_words = set(stopwords.words(language))
 
     for tweet in tweets:
         tokens = tokenize(tweet["text"], parser)
-        tokens = filter(lambda token: token in stop_words, tokens)
-        tokens = map(stemmer, tokens)
+        tokens = clean_tokens(tokens, stop_words)
         tweet["topics"] = analyze(tokens, topics)
     return tweets
 
