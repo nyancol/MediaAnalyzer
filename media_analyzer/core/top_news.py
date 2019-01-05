@@ -6,7 +6,6 @@ from sklearn.feature_extraction.text import CountVectorizer
 from nltk.corpus import stopwords
 import spacy
 from media_analyzer import database
-from media_analyzer.core import topic_detection_unsupervised
 
 
 NUM_TOPICS = 20
@@ -49,11 +48,13 @@ def get_top_topics(language, tweets):
     return components
 
 
-def get_last_date():
+def get_last_date(language):
     res = None
     with database.connection() as conn:
         cur = conn.cursor()
-        cur.execute("SELECT MAX(begin) FROM thirty_days_topics;")
+        cur.execute(f"""SELECT MAX(begin)
+                        FROM thirty_days_topics
+                        WHERE language = '{language}';""")
         res = cur.fetchone()
     return res[0] if res else None
 
@@ -103,15 +104,15 @@ def count_matches(tweets, topics, language):
 
 
 def compute_language(language):
-    begin = get_last_date()
+    begin = get_last_date(language)
     if begin is None:
-        begin = datetime.datetime(2018, 12, 1)
+        begin = datetime.datetime(2018, 12, 1).date()
     else:
         begin += datetime.timedelta(days=1)
 
-    while begin < datetime.datetime.now() - datetime.timedelta(days=30):
+    while begin < datetime.datetime.now().date() - datetime.timedelta(days=30):
         end = begin + datetime.timedelta(days=30)
-        print(f"Computing interval: {begin} -> {end}")
+        print(f"Computing interval: {begin} -> {end} for {language}")
         tweets = load_data(begin, end, language)
         topics = get_top_topics(language, tweets)
         topics = count_matches(tweets, topics, language)

@@ -3,7 +3,6 @@ from nltk.corpus import stopwords
 from nltk.corpus import wordnet as wn
 from nltk.stem import WordNetLemmatizer
 from nltk.stem.snowball import SnowballStemmer
-import jellyfish
 import spacy
 from media_analyzer import database
 
