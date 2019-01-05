@@ -5,15 +5,13 @@ name = "pypi"
 
 [packages]
 tweepy = "*"
-textblob = "*"
 pip = "==18.0"
-numpy = "==1.14.5"
-gensim = "*"
+numpy = "*"
 spacy = "*"
 nltk = "*"
-jellyfish = "*"
 "psycopg2" = "*"
 flask = "*"
+sklearn = "*"
 
 [dev-packages]
 pytest = "*"

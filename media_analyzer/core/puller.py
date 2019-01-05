@@ -52,11 +52,12 @@ def main():
         tweets = []
         for publisher in publishers[language]:
             print("Pulling {:<20}".format(publisher), end=" - ")
-            t_tweets = get_tweets(api, publisher)
-            for tweet in t_tweets:
-                tweet["language"] = language
-            print(f"Found {len(t_tweets)} new tweets")
-            tweets.extend(t_tweets)
+            p_tweets = get_tweets(api, publisher)
+            for p_tweet in p_tweets:
+                p_tweet["language"] = language
+            print(f"Found {len(p_tweets)} new tweets")
+            tweets.extend(p_tweets)
+
         print("Analyzing topics")
         tweets = topic_detection.run(tweets, language)
         print("Analyzing sentiments")

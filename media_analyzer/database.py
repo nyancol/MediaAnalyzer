@@ -39,19 +39,28 @@ def create_tables():
     # """
     # CREATE TABLE tweets (
     #     id bigint PRIMARY KEY,
-    #     publisher varchar (25) NOT NULL,
-    #     language varchar (20) NOT NULL,
+    #     publisher text NOT NULL,
+    #     language text NOT NULL,
     #     created_at timestamp NOT NULL,
-    #     text varchar (300) NOT NULL,
-    #     topics varchar[],
+    #     text text NOT NULL,
+    #     tokens text[] NOT NULL,
+    #     topics text[],
     #     negative float NOT NULL, 
     #     neutral float NOT NULL, 
     #     positive float NOT NULL
     # );
     # """,
+    # """
+    # CREATE TABLE topics (
+    #     topic text PRIMARY KEY
+    # );
+    # """,
     """
-    CREATE TABLE topics (
-        topic varchar (25) PRIMARY KEY
+    CREATE TABLE thirty_days_topics (
+        begin date,
+        language text,
+        topics json,
+        PRIMARY KEY (begin, language)
     );
     """,
     ]
@@ -77,7 +86,7 @@ def populate_tables():
 
 
 def drop_tables():
-    tables = ["tweets", "topics"]
+    tables = ["tweets", "topics", "thirty_days_topics"]
     with connection() as conn:
         cur = conn.cursor()
         for table in tables:
@@ -126,9 +135,10 @@ def load_tweets(publisher=None, language=None):
 
 def insert_tweet(tweets):
     sql = """INSERT INTO tweets (id, publisher, language, created_at, text,
-                                 topics, negative, neutral, positive)
+                                 tokens, topics, negative, neutral, positive)
              VALUES (%(id)s, %(publisher)s, %(language)s, %(created_at)s,
-                     %(text)s, %(topics)s, %(negative)s, %(neutral)s, %(positive)s);"""
+                     %(text)s, %(tokens)s, %(topics)s, %(negative)s, %(neutral)s,
+                     %(positive)s);"""
     with connection() as conn:
         cur = conn.cursor()
         cur.executemany(sql, tweets)
@@ -157,6 +167,7 @@ def update_sentiment(tweets):
 
 
 if __name__ == "__main__":
-    drop_tables()
+    pass
+    # drop_tables()
     create_tables()
-    populate_tables()
+    # populate_tables()

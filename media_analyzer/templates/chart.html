@@ -6,21 +6,41 @@
     <script src="http://google.github.io/palette.js/palette.js"></script>
 
     <!-- import scripts -->
-    <script src="static/languages_chart.js" type="text/javascript"></script>
-    <script src="static/topics_chart.js" type="text/javascript"></script>
+    <script src="static/js/topics_chart.js" type="text/javascript"></script>
+    <script src="static/js/thirty_days_topics_chart.js" type="text/javascript"></script>
 
     <title>Media Analyzer</title>
 </head>
 <body>
-    <h1>Media Analyzer</h1>
-    <p>Number of tweets:  {{tweet_count}}</p>
-    <!-- bar chart canvas element -->
-    <canvas id="languages_chart" width="600" height="400"></canvas>
+    <div class="dashboard">
+        <div class="dashboard__item">
+            <div class="card">
+                <canvas id="thirty_days_topics"</canvas>
+            </div>
+        </div>
+        <div id=topics_chart_div class="dashboard__item">
+            <h2 id=topics_chart_title></h2>
+            <form id="language_form" action="http://localhost:5001/" method="get">
+                <select onchange=this.form.submit(); name="language_selector" id="language_selector"></select>
+            </form>
+            <div class="card">
+                <canvas id="topics_chart"</canvas>
+            </div>
+        </div>
+    </div>
     <script>
-        get_language_stats_chart({{languages_stats|safe}});
-    </script>
-    <canvas id="topics_chart" width="300" height="300"></canvas>
-    <script>
+        var languages = {{languages|safe}}
+        languages.unshift("all")
+        var language_selector = document.getElementById("language_selector");
+        //Create and append the options
+        for (var i = 0; i < languages.length; i++) {
+            var option = document.createElement("option");
+            option.value = languages[i];
+            option.text = languages[i];
+            language_selector.appendChild(option);
+        }
+
         get_topics_chart({{topics_stats|safe}});
+        get_thirty_days_chart({{thirty_days_stats|safe}});
     </script>
 </body>

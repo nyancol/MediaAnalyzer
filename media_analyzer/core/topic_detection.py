@@ -5,12 +5,12 @@ from nltk.stem import WordNetLemmatizer
 from nltk.stem.snowball import SnowballStemmer
 import jellyfish
 import spacy
-import spacy.lang
 from media_analyzer import database
 
 
-def tokenize(text, parser):
-    return [word.lemma_ for word in parser(text.lower())]
+def tokenize(text, parser, stop_words):
+    tokens = [word.lemma_ for word in parser(text.lower()) if not word.like_url]
+    return list(filter(lambda token: token not in stop_words, tokens))
 
 
 def load_topics(language):
@@ -46,10 +46,6 @@ def update():
         database.update_topics(tweets)
 
 
-def clean_tokens(tokens, stop_words):
-    return list(filter(lambda token: token not in stop_words, tokens))
-
-
 def get_parser(language):
     parsers = {
                "english": "en",
@@ -66,9 +62,8 @@ def run(tweets, language):
     stop_words = set(stopwords.words(language))
 
     for tweet in tweets:
-        tokens = tokenize(tweet["text"], parser)
-        tokens = clean_tokens(tokens, stop_words)
-        tweet["topics"] = analyze(tokens, topics)
+        tweet["tokens"] = tokenize(tweet["text"], parser, stop_words)
+        tweet["topics"] = analyze(tweet["tokens"], topics)
     return tweets
 
 

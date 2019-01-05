@@ -2,17 +2,25 @@ import numpy as np
 from datetime import datetime
 from flask import Flask
 from flask import Markup
-from flask import Flask
+from flask import Flask, request
 from flask import render_template
 
-# from configparser import ConfigParser
 from . import database
 
 app = Flask(__name__)
 
 
-def get_weekly_topic_stats():
+def get_weekly_topic_stats(publisher=None, language=None):
     res = None
+    conditions = []
+    condition = ""
+    if publisher:
+        conditions.append(f"publisher = '{publisher}'")
+    if language:
+        conditions.append(f"language = '{language}'")
+    if language or publisher:
+        condition = " AND " + " AND ".join(conditions)
+
     with database.connection() as conn:
         cur = conn.cursor()
         cur.execute("SELECT topic FROM topics")
@@ -20,7 +28,7 @@ def get_weekly_topic_stats():
         begin = datetime(2018, 10, 1)
         cur.execute(f"""SELECT topics.topic, date_trunc('week', tweets.created_at::date) AS weekly, COUNT(*)
                             FROM tweets JOIN topics ON topics.topic = ANY(tweets.topics)
-                            WHERE '{begin}'::date < tweets.created_at 
+                            WHERE '{begin}'::date < tweets.created_at {condition}
                             GROUP BY weekly, topics.topic
                             ORDER BY weekly;""")
         res = cur.fetchall()
@@ -44,32 +52,29 @@ def get_weekly_topic_stats():
             "datasets": [{"label": topic, "data": data.tolist()} for topic, data in topics_stats.items()]
            }
 
-
-def get_language_stats():
+def get_thirty_days_topics():
+    res = None
     with database.connection() as conn:
         cur = conn.cursor()
-        cur.execute("SELECT language, COUNT(*) FROM tweets GROUP BY language")
+        cur.execute("SELECT begin, topics FROM thirty_days_topics WHERE language = 'english'")
         res = cur.fetchall()
         cur.close()
-    languages, counts = zip(*res)
-    return {"languages": list(languages), "counts": list(counts)}
-
-
-def get_tweet_count():
-    with database.connection() as conn:
-        cur = conn.cursor()
-        cur.execute("SELECT COUNT(*) FROM tweets")
-        count = cur.fetchone()
-        cur.close()
-    return count[0]
+    # return [{"begin": begin, "topics": topics} for begin, topics in res]
+    return [{"topics": topics} for _, topics in res]
 
 
 @app.route("/")
 def chart():
-    topics_stats = get_weekly_topic_stats()
-    languages_stats = get_language_stats()
-    tweet_count = get_tweet_count()
-    return render_template('chart.html', tweet_count=tweet_count, languages_stats=languages_stats, topics_stats=topics_stats)
+    language_selected = "english"
+    # if request.args["language_selector"] != "all":
+    #     language_selected = request.args["language_selector"]
+
+    topics_stats = get_weekly_topic_stats(language=language_selected)
+    languages = database.get_languages()
+    thirty_days_stats = get_thirty_days_topics()
+    print(thirty_days_stats[0])
+    return render_template('chart.html', languages=languages, topics_stats=topics_stats,
+                            thirty_days_stats=thirty_days_stats)
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=5001)
+    app.run(host="0.0.0.0", port=5001)
