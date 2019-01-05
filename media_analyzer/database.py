@@ -23,7 +23,6 @@ def connection():
     conn = None
     try:
         params = config()
-        # print('Connecting to the PostgreSQL database...')
         conn = psycopg2.connect(**params)
         yield conn
     except psycopg2.DatabaseError as error:
@@ -31,7 +30,6 @@ def connection():
     finally:
         if conn is not None:
             conn.close()
-            # print('Database connection closed.')
 
 
 def create_tables():
@@ -39,7 +37,7 @@ def create_tables():
     # """
     # CREATE TABLE tweets (
     #     id bigint PRIMARY KEY,
-    #     publisher text NOT NULL,
+    #     publisher text REFERENCES publishers(screen_name),
     #     language text NOT NULL,
     #     created_at timestamp NOT NULL,
     #     text text NOT NULL,
@@ -55,14 +53,25 @@ def create_tables():
     #     topic text PRIMARY KEY
     # );
     # """,
-    """
-    CREATE TABLE thirty_days_topics (
-        begin date,
-        language text,
-        topics json,
-        PRIMARY KEY (begin, language)
-    );
-    """,
+    # """
+    # CREATE TABLE thirty_days_topics (
+    #     begin date,
+    #     language text,
+    #     topics json,
+    #     PRIMARY KEY (begin, language)
+    # );
+    # """,
+    # """
+    # CREATE TABLE publishers (
+    #     screen_name text PRIMARY KEY,
+    #     name text NOT NULL,
+    #     country text,
+    #     city text,
+    #     description text,
+    #     language text,
+    #     profile_image_url text
+    # );
+    # """
     ]
 
     with connection() as conn:
@@ -86,7 +95,8 @@ def populate_tables():
 
 
 def drop_tables():
-    tables = ["tweets", "topics", "thirty_days_topics"]
+    tables = ["tweets", "topics", "thirty_days_topics",
+              "publishers"]
     with connection() as conn:
         cur = conn.cursor()
         for table in tables:
@@ -107,7 +117,7 @@ def get_publishers():
 def get_languages():
     with connection() as conn:
         cur = conn.cursor()
-        cur.execute("SELECT DISTINCT language FROM tweets;")
+        cur.execute("SELECT DISTINCT language FROM publishers;")
         rows = cur.fetchall()
         cur.close()
     return [row[0] for row in rows]
@@ -169,5 +179,5 @@ def update_sentiment(tweets):
 if __name__ == "__main__":
     pass
     # drop_tables()
-    create_tables()
+    # create_tables()
     # populate_tables()

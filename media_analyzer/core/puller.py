@@ -1,19 +1,10 @@
-from media_analyzer import database
-from . import sentiment_analysis
-from . import topic_detection
-
-from configparser import ConfigParser
-import tweepy
 import csv
 import datetime
 
-def get_api():
-    config = ConfigParser()
-    config.read("media_analyzer/api_keys.ini")
-    consumer_key = config.get("twitter", "consumer_key")
-    consumer_secret = config.get("twitter", "consumer_secret")
-    auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
-    return tweepy.API(auth)
+from media_analyzer import database
+from media_analyzer import apis
+from . import sentiment_analysis
+from . import topic_detection
 
 
 def get_last_id(publisher):
@@ -36,21 +27,24 @@ def get_tweets(api, publisher):
     return tweets
 
 
-def load_publishers():
-    config = ConfigParser(allow_no_value=True)
-    config.read("media_analyzer/core/publishers.ini")
-    publishers = {}
-    for s in config.sections():
-        publishers[s] = config.options(s)
-    return publishers
+def get_publishers(language):
+    rows = None
+    with database.connection() as conn:
+        cur = conn.cursor()
+        cur.execute(f"""SELECT screen_name
+                        FROM publishers
+                        WHERE language = '{language}';""")
+        rows = cur.fetchall()
+    return [row[0] for row in rows]
 
 
 def main():
-    api = get_api()
-    publishers = load_publishers()
-    for language in publishers:
+    api = apis.get_twitter()
+    languages = database.get_languages()
+    for language in languages:
+        publishers = get_publishers(language)
         tweets = []
-        for publisher in publishers[language]:
+        for publisher in publishers:
             print("Pulling {:<20}".format(publisher), end=" - ")
             p_tweets = get_tweets(api, publisher)
             for p_tweet in p_tweets:

@@ -18,6 +18,11 @@ python -m media_analyzer.app
 python -m media_analyzer.core.puller
 ```
 
+### Update publishers
+```sh
+python -m media_analyzer.core.publishers
+```
+
 ## API management
 ### Decript API
 ```sh

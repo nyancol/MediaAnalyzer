@@ -12,6 +12,7 @@ nltk = "*"
 "psycopg2" = "*"
 flask = "*"
 sklearn = "*"
+geopy = "*"
 
 [dev-packages]
 pytest = "*"
