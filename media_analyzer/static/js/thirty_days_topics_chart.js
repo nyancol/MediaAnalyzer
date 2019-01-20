@@ -24,7 +24,6 @@ function get_thirty_days_chart(data) {
         // maintainAspectRatio: false
     };
 
-    console.log(bar_chart_data)
     var myChart = new Chart(ctx, {
         type: "horizontalBar",
         data: bar_chart_data,

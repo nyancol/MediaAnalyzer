@@ -6,6 +6,17 @@ spacy.load('fr')
 from spacy.lang.fr import French
 
 
+def update_sentiment(tweets):
+    sql = """UPDATE tweets
+             SET negative = %(negative)s, neutral = %(neutral)s, positive = %(positive)s
+             WHERE id = %(id)s"""
+    with connection() as conn:
+        cur = conn.cursor()
+        cur.executemany(sql, tweets)
+        conn.commit()
+        cur.close()
+
+
 def update():
     languages = database.get_languages()
     for language in languages:
@@ -13,7 +24,7 @@ def update():
         tweets = database.load_tweets(language=language)
         print(f"Updating {len(tweets)} tweets")
         tweets = run(tweets, language)
-        database.update_sentiment(tweets)
+        update_sentiment(tweets)
 
 
 def get_analyzer(language):

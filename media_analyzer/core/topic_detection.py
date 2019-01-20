@@ -1,8 +1,5 @@
 from configparser import ConfigParser
 from nltk.corpus import stopwords
-from nltk.corpus import wordnet as wn
-from nltk.stem import WordNetLemmatizer
-from nltk.stem.snowball import SnowballStemmer
 import spacy
 from media_analyzer import database
 
@@ -13,26 +10,34 @@ def tokenize(text, parser, stop_words):
 
 
 def load_topics(language):
-    config = ConfigParser(allow_no_value=True)
-    config.read("media_analyzer/core/topics.ini")
+    rows = None
+    with database.connection() as conn:
+        cur = conn.cursor()
+        cur.execute(f"SELECT topic, keywords FROM topics WHERE language = '{language}'")
+        rows = cur.fetchall()
+        cur.close()
     topics = {}
-    for s in config.sections():
-        topic_list = config.get(s, language)[1:-1]
-        topics[s] = [t.strip() for t in topic_list.split(',')]
+    for topic, keywords in rows:
+        topics[topic] = keywords
     return topics
 
 
 def analyze(tokens, topics):
-    def similarity(w1, w2):
-        return 1 if w1 == w2 else 0
-
     matches = [False] * len(topics)
-    threshold = 0.9
     for i, (topic, keywords) in enumerate(topics.items()):
         for token in tokens:
-            if any([similarity(key, token) > threshold for key in keywords]):
+            if any([key == token for key in keywords]):
                 matches[i] |= True
     return [t for t, m in zip(topics, matches) if m]
+
+
+def update_topics(tweets):
+    sql = "UPDATE tweets SET topics = %(topics)s WHERE id = %(id)s"
+    with connection() as conn:
+        cur = conn.cursor()
+        cur.executemany(sql, tweets)
+        conn.commit()
+        cur.close()
 
 
 def update():
@@ -40,9 +45,11 @@ def update():
     for language in languages:
         print(f"Updating {language}")
         tweets = database.load_tweets(language=language)
-        tweets = run(tweets, language)
+        topics = load_topics(language)
+        for tweet in tweets:
+            tweet["topics"] = analyze(tweet["tokens"], topics)
         print(f"Finished updating {language}")
-        database.update_topics(tweets)
+        update_topics(tweets)
 
 
 def get_parser(language):
@@ -67,4 +74,5 @@ def run(tweets, language):
 
 
 if __name__ == "__main__":
-    update()
+    pass
+    # update()

@@ -45,12 +45,16 @@ def create_tables():
     #     topics text[],
     #     negative float NOT NULL, 
     #     neutral float NOT NULL, 
-    #     positive float NOT NULL
+    #     positive float NOT NULL,
+    #     raw json NOT NULL
     # );
     # """,
     # """
     # CREATE TABLE topics (
-    #     topic text PRIMARY KEY
+    #     topic text NOT NULL,
+    #     language text NOT NULL,
+    #     keywords text[] NOT NULL,
+    #     PRIMARY KEY (language, keywords)
     # );
     # """,
     # """
@@ -69,7 +73,8 @@ def create_tables():
     #     city text,
     #     description text,
     #     language text,
-    #     profile_image_url text
+    #     profile_image_url text,
+    #     insert_date timestamp
     # );
     # """
     ]
@@ -78,18 +83,6 @@ def create_tables():
         cur = conn.cursor()
         for command in commands:
             cur.execute(command)
-        cur.close()
-        conn.commit()
-
-
-def populate_tables():
-    config = ConfigParser()
-    config.read("media_analyzer/core/topics.ini")
-    topics = [{"topic": topic} for topic in config.sections()]
-    sql = """INSERT INTO topics (topic) VALUES (%(topic)s);"""
-    with connection() as conn:
-        cur = conn.cursor()
-        cur.executemany(sql, topics)
         cur.close()
         conn.commit()
 
@@ -123,6 +116,15 @@ def get_languages():
     return [row[0] for row in rows]
 
 
+def get_topics():
+    with connection() as conn:
+        cur = conn.cursor()
+        cur.execute("SELECT topic FROM topics;")
+        rows = cur.fetchall()
+        cur.close()
+    return [row[0] for row in rows]
+
+
 def load_tweets(publisher=None, language=None):
     with connection() as conn:
         cur = conn.cursor()
@@ -143,41 +145,7 @@ def load_tweets(publisher=None, language=None):
     return [dict(zip(colnames, row)) for row in rows]
 
 
-def insert_tweet(tweets):
-    sql = """INSERT INTO tweets (id, publisher, language, created_at, text,
-                                 tokens, topics, negative, neutral, positive)
-             VALUES (%(id)s, %(publisher)s, %(language)s, %(created_at)s,
-                     %(text)s, %(tokens)s, %(topics)s, %(negative)s, %(neutral)s,
-                     %(positive)s);"""
-    with connection() as conn:
-        cur = conn.cursor()
-        cur.executemany(sql, tweets)
-        cur.close()
-        conn.commit()
-
-
-def update_topics(tweets):
-    sql = "UPDATE tweets SET topics = %(topics)s WHERE id = %(id)s"
-    with connection() as conn:
-        cur = conn.cursor()
-        cur.executemany(sql, tweets)
-        conn.commit()
-        cur.close()
-
-
-def update_sentiment(tweets):
-    sql = """UPDATE tweets
-             SET negative = %(negative)s, neutral = %(neutral)s, positive = %(positive)s
-             WHERE id = %(id)s"""
-    with connection() as conn:
-        cur = conn.cursor()
-        cur.executemany(sql, tweets)
-        conn.commit()
-        cur.close()
-
-
 if __name__ == "__main__":
     pass
     # drop_tables()
     # create_tables()
-    # populate_tables()

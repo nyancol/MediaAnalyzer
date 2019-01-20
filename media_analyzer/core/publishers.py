@@ -1,3 +1,4 @@
+from datetime import datetime
 from configparser import ConfigParser
 from geopy.geocoders import Nominatim
 from media_analyzer import database
@@ -14,12 +15,15 @@ def load_publishers():
 
 
 def update_table(publishers):
+    for publisher in publishers:
+        publisher["insert_timestamp"] = datetime.now()
+
     sql = """INSERT INTO publishers (screen_name, name, country,
                                      city, description, language,
-                                     profile_image_url)
+                                     profile_image_url, insert_timestamp)
              VALUES (%(screen_name)s, %(name)s, %(country)s,
                      %(city)s, %(description)s, %(language)s,
-                     %(profile_image_url)s);"""
+                     %(profile_image_url)s, %(insert_timestamp)s);"""
     with database.connection() as conn:
         cur = conn.cursor()
         cur.executemany(sql, publishers)
@@ -59,11 +63,11 @@ def get_publishers():
     rows = None
     with database.connection() as conn:
         cur = conn.cursor()
-        cur.execute("SELECT screen_name FROM publishers;")
+        cur.execute("SELECT * FROM publishers ORDER BY language;")
         rows = cur.fetchall()
-    if rows:
-        return [row[0].lower() for row in rows]
-    return []
+        colnames = [desc[0] for desc in cur.description]
+        cur.close()
+    return [dict(zip(colnames, row)) for row in rows]
 
 
 def main():

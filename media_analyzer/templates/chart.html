@@ -13,16 +13,15 @@
 </head>
 <body>
     <div class="dashboard">
+        <select onchange=switch_language(this.value); name="language_selector" id="language_selector"></select>
         <div class="dashboard__item">
             <div class="card">
                 <canvas id="thirty_days_topics"</canvas>
             </div>
         </div>
+        <select onchange=switch_topic(this.value); name="topic_selector" id="topic_selector"></select>
         <div id=topics_chart_div class="dashboard__item">
             <h2 id=topics_chart_title></h2>
-            <form id="language_form" action="http://localhost:5001/" method="get">
-                <select onchange=this.form.submit(); name="language_selector" id="language_selector"></select>
-            </form>
             <div class="card">
                 <canvas id="topics_chart"</canvas>
             </div>
@@ -30,7 +29,6 @@
     </div>
     <script>
         var languages = {{languages|safe}}
-        languages.unshift("all")
         var language_selector = document.getElementById("language_selector");
         //Create and append the options
         for (var i = 0; i < languages.length; i++) {
@@ -38,9 +36,30 @@
             option.value = languages[i];
             option.text = languages[i];
             language_selector.appendChild(option);
-        }
+        };
 
-        get_topics_chart({{topics_stats|safe}});
-        get_thirty_days_chart({{thirty_days_stats|safe}});
+        var topics = {{topics|safe}};
+        var topic_selector = document.getElementById("topic_selector");
+        for (let i = 0; i < topics.length; i++) {
+            let option = document.createElement("option");
+            option.value = topics[i];
+            option.text = topics[i];
+            topic_selector.appendChild(option);
+        };
+
+        function switch_language(language) {
+            let topic_selector = document.getElementById("topic_selector");
+            let topic = topic_selector.value
+            console.log("Selected " + topic + " and " + language);
+            get_topics_chart({{topics_stats|safe}}[language][topic]);
+            get_thirty_days_chart({{thirty_days_stats|safe}}[language]);
+        };
+
+        function switch_topic(topic) {
+            let language_selector = document.getElementById("language_selector");
+            let language = language_selector.value
+            console.log("Selected " + topic + " and " + language);
+            get_topics_chart({{topics_stats|safe}}[language][topic]);
+        };
     </script>
 </body>
