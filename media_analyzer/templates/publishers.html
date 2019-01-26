@@ -120,31 +120,35 @@
           <div class="demo-charts mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid">
             <form action="#">
               <div class="mdl-textfield mdl-js-textfield">
-                <input class="mdl-textfield__input" name="text" type="text" id="text_field">
-                <label class="mdl-textfield__label" for="sample1">Enter a twitter account...</label>
+                <input class="mdl-textfield__input" name="screen_name" type="text" id="screen_name_text">
+                <label class="mdl-textfield__label" for="screen_name_text">Enter a twitter account... (e.g. nytimes)</label>
               </div>
-              <div class="demo-charts mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid" id=input_publisher>
-                <input  type=button onclick='this.form.submit();' value"test">
+              <div class="mdl-textfield mdl-js-textfield">
+                <input class="mdl-textfield__input" name="language" type="text" id="language_text" pattern={{language_pattern|safe}}>
+                <label class="mdl-textfield__label" for="language_text">Language... (english, french, spanish, italian)</label>
+              </div>
+              <div class="mdl-textfield mdl-js-textfield">
+                <input type="submit" class="mdl-button mdl-js-button mdl-button--raised">
               </div>
             </form>
-          <div id=insert_publisher>
-          </div>
-          <script>
-              if ("{{input_publisher|safe}}" != "") {
-                  <!-- let button_div = document.getElementById("insert_publisher"); -->
-                  <!-- let button = document.createElement("button") -->
-                  <!-- button.setAttribute("class", "mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored") -->
-                  <!-- button.setAttribute("type", "submit") -->
-                  <!-- button.setAttribute("value", "test") -->
-                  <!-- button.innerHTML = '<i class="material-icons">add</i>' -->
-                  <!-- button_div.appendChild(button) -->
-                  show_input_publisher({{input_publisher|safe}});
-              };
-          </script>
-          </div>
-          <div class="demo-charts mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid" id=publishers>
+            <div id="demo-snackbar-example" class="mdl-js-snackbar mdl-snackbar">
+              <div class="mdl-snackbar__text"></div>
+              <button class="mdl-snackbar__action" type="button"></button>
+            </div>
+            <div class="demo-charts mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid" id=publishers>
             <script>
                 show_table({{publishers|safe}});
+                r(function(){
+                    var snackbarContainer = document.querySelector('#demo-snackbar-example');
+                    var data = {
+                      message: "{{message|safe}}",
+                      timeout: 3000,
+                    };
+                    if ("{{message|safe}}" != "None") {
+                        snackbarContainer.MaterialSnackbar.showSnackbar(data);
+                    }
+                });
+                function r(f){/in/.test(document.readyState)?setTimeout('r('+f+')',9):f()}
             </script>
           </div>
         </div>

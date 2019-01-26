@@ -1,8 +1,12 @@
 from datetime import datetime
 from configparser import ConfigParser
 from geopy.geocoders import Nominatim
+import tweepy.error
+import psycopg2
+
 from media_analyzer import database
 from media_analyzer import apis
+from media_analyzer import exceptions
 
 
 def load_publishers():
@@ -14,7 +18,7 @@ def load_publishers():
     return publishers
 
 
-def update_table(publishers):
+def insert_db(publishers):
     for publisher in publishers:
         publisher["insert_timestamp"] = datetime.now()
 
@@ -26,13 +30,23 @@ def update_table(publishers):
                      %(profile_image_url)s, %(insert_timestamp)s);"""
     with database.connection() as conn:
         cur = conn.cursor()
-        cur.executemany(sql, publishers)
-        conn.commit()
+        try:
+            cur.executemany(sql, publishers)
+        except psycopg2.IntegrityError as exc:
+            conn.rollback()
+            raise exceptions.DuplicateDBEntryException() from exc
+        else:
+            conn.commit()
         cur.close()
 
 
 def get_info(api, publisher):
-    user = api.get_user(publisher)
+    user = None
+    try:
+        user = api.get_user(publisher)
+    except tweepy.error.TweepError as err:
+        raise exceptions.InvalidTwitterUserException() from err
+
     languages = {"en": "english", "it": "italian", "es": "spanish", "fr": "french"}
 
     country = None
@@ -77,7 +91,7 @@ def main():
     publishers = [publisher for publisher in publishers
                   if publisher.lower() not in inserted_publishers]
     publishers = [get_info(api, publisher) for publisher in publishers]
-    update_table(publishers)
+    insert_db(publishers)
 
 
 if __name__ == "__main__":

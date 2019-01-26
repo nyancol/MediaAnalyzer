@@ -8,6 +8,7 @@ from flask import render_template
 from . import database
 from .core import publishers
 from . import apis
+from . import exceptions
 
 app = Flask(__name__)
 
@@ -118,22 +119,35 @@ def db_stats():
 
 @app.route('/publishers')
 def publishers_route():
-    input_publisher = ""
     print(request.args)
-    if "text" in request.args and request.args.get('text') != "":
-        twitter_name = request.args.get("text")
-        api = apis.get_twitter()
-        input_publisher = publishers.get_info(api, twitter_name)
-        for key in input_publisher:
-            if input_publisher[key] is None or key == "insert_timestamp":
-                input_publisher[key] = ""
+    message = None
+    languages = database.get_languages()
+    if ("screen_name" in request.args and request.args.get("screen_name") != "") \
+            and ("language" in request.args):
+        language = request.args.get("language").lower()
+        if language not in languages:
+            message = f"'{language}' not in {database.get_languages()}"
+        else:
+            twitter_name = request.args.get("screen_name")
+            api = apis.get_twitter()
+            try:
+                publisher = publishers.get_info(api, twitter_name)
+            except exceptions.InvalidTwitterUserException as exc:
+                message = f"Twitter user '{twitter_name}' not found"
+            else:
+                try:
+                    publishers.insert_db([publisher])
+                    message = f"Added {publisher['name']} - {publisher['screen_name']} into DB"
+                except exceptions.DuplicateDBEntryException:
+                    message = f"{publisher['name']} is already present in DB"
 
     publishers_stats = publishers.get_publishers()
     for publisher in publishers_stats:
         for key in publisher:
             if publisher[key] is None or key == "insert_timestamp":
                 publisher[key] = ""
-    return render_template('publishers.html', publishers=publishers_stats, input_publisher=input_publisher)
+    return render_template('publishers.html', publishers=publishers_stats, message=message,
+                           language_pattern='|'.join(languages))
 
 
 if __name__ == "__main__":
