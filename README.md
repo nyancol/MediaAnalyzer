@@ -23,6 +23,13 @@ python -m media_analyzer.core.puller
 python -m media_analyzer.core.publishers
 ```
 
+### Backup Database
+To backup the database and upload it to S3, run:
+```sh
+
+python -m media_analyzer.backup
+```
+
 ## API management
 ### Decript API
 ```sh
