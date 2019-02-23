@@ -10,7 +10,7 @@ def readconfig(f):
     (api_keys.ini) which is retrieved from the function name.
     The function must be named: <prefix>_<section_in_config>
     """
-    @wrap(f)
+    @wraps(f)
     def wrapper():
         section = f.__name__.split('_')[1]
         config = ConfigParser()
