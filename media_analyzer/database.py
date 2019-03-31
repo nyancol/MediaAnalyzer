@@ -41,11 +41,7 @@ def create_tables():
     #     language text NOT NULL,
     #     created_at timestamp NOT NULL,
     #     text text NOT NULL,
-    #     tokens text[] NOT NULL,
-    #     topics text[],
-    #     negative float NOT NULL, 
-    #     neutral float NOT NULL, 
-    #     positive float NOT NULL,
+    #     original_screen_name text NOT NULL,
     #     raw json NOT NULL
     # );
     # """,

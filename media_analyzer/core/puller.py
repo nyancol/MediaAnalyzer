@@ -1,28 +1,21 @@
-import csv
-import datetime
 import tweepy
 import json
+import fastavro
+import io
+import uuid
 
 from media_analyzer import database
 from media_analyzer import apis
-from . import sentiment_analysis
-from . import topic_detection
 
 
-def insert_tweets(tweets):
-    for tweet in tweets:
-        tweet["raw"] = json.dumps(tweet["raw"])
-
-    sql = """INSERT INTO tweets (id, publisher, language, created_at, text,
-                                 tokens, topics, negative, neutral, positive, raw)
-             VALUES (%(id)s, %(publisher)s, %(language)s, %(created_at)s,
-                     %(text)s, %(tokens)s, %(topics)s, %(negative)s, %(neutral)s,
-                     %(positive)s, %(raw)s);"""
+#### PULL TWEETS ####
+def get_publishers():
+    rows = None
     with database.connection() as conn:
         cur = conn.cursor()
-        cur.executemany(sql, tweets)
-        cur.close()
-        conn.commit()
+        cur.execute("SELECT screen_name FROM publishers;")
+        rows = cur.fetchall()
+    return [row[0] for row in rows]
 
 
 def get_last_id(publisher):
@@ -37,45 +30,100 @@ def get_last_id(publisher):
 def get_last_tweets(api, publisher):
     tweets = []
     since_id = get_last_id(publisher)
-    for status in tweepy.Cursor(api.user_timeline, since_id=since_id, id=publisher).items():
-        tweets.append({"id": status.id,
-                       "publisher": publisher,
-                       "created_at": status.created_at,
-                       "text": status.text,
-                       "raw": status._json})
-    return tweets
+    return tweepy.Cursor(api.user_timeline, since_id=since_id, id=publisher).items()
 
 
-def get_publishers(language):
-    rows = None
+def pull():
+    api = apis.get_twitter()
+    # Staging Tweets - Could be published to a Kafka topic with key: (language, publisher)
+    # TODO: move to `tweets` array append to kafka producer
+    raw_tweets = []
+    for publisher in get_publishers():
+        print("Pulling {:<20}".format(publisher), end=" - ")
+        statii = get_last_tweets(api, publisher)
+        raw_tweets.extend(statii)
+    return raw_tweets
+
+
+#### PROCESS TWEETS ####
+def get_language(publisher):
     with database.connection() as conn:
         cur = conn.cursor()
-        cur.execute(f"""SELECT screen_name
+        cur.execute(f"""SELECT language
                         FROM publishers
-                        WHERE language = '{language}';""")
-        rows = cur.fetchall()
-    return [row[0] for row in rows]
+                        WHERE screen_name = '{publisher}';
+                     """)
+        language = cur.fetchone()[0]
+        cur.close()
+    return language
 
 
+def process_tweet(status):
+    tweet = {
+             "id": status.id,
+             "created_at": status.created_at,
+             "text": status.text,
+             "raw": json.dumps(status._json),
+             "publisher": status.user.screen_name,
+             "language": get_language(status.user.screen_name),
+             "original_screen_name": None,
+            }
+
+    if hasattr(status, "retweeted_status"):
+        tweet["original_screen_name"] = status.retweeted_status.user.screen_name
+    return tweet
+
+
+#### STORE PROCESSED TWEETS ####
+def insert_tweets(tweets):
+    sql = """INSERT INTO tweets (id, publisher, language, created_at, text,
+                                 original_screen_name, raw)
+             VALUES (%(id)s, %(publisher)s, %(language)s, %(created_at)s,
+                     %(text)s, %(original_screen_name)s, %(raw)s);"""
+    with database.connection() as conn:
+        cur = conn.cursor()
+        cur.executemany(sql, tweets)
+        cur.close()
+        conn.commit()
+
+
+def upload_avro(tweets):
+    schema = {
+        "doc": "Tweets pulled and enriched",
+        "name": "Media Analyzer",
+        "namespace": "com.media_analyzer.v1.tweets",
+        "type": "record",
+        "fields": [
+            {"name": "id", "type": "long"},
+            {"name": "publisher", "type": "string"},
+            {"name": "language", "type": "string"},
+            {"name": "created_at", "type": "int", "logicalType": "time-millis"},
+            {"name": "text", "type": "string"},
+            {"name": "tokens", "type": "array", "items": "string"},
+            {"name": "raw", "type": "string"},
+        ]
+    }
+    schema = fastavro.parse_schema(schema)
+    bytes_array = io.BytesIO()
+    fastavro.writer(bytes_array, schema, tweets)
+
+    resource = apis.get_aws()
+    bucket = "media-analyzer-store"
+    file_name = str(uuid.uuid4().hex[:6]) + ".avro"
+    resource.upload_fileobj(bytes_array, bucket_name=bucket, key=file_name)
+
+
+#### MAIN ####
 def main():
-    api = apis.get_twitter()
-    languages = database.get_languages()
-    for language in languages:
-        publishers = get_publishers(language)
-        tweets = []
-        for publisher in publishers:
-            print("Pulling {:<20}".format(publisher), end=" - ")
-            p_tweets = get_last_tweets(api, publisher)
-            for p_tweet in p_tweets:
-                p_tweet["language"] = language
-            print(f"Found {len(p_tweets)} new tweets")
-            tweets.extend(p_tweets)
+    raw_tweets = pull()
 
-        print("Analyzing topics")
-        tweets = topic_detection.run(tweets, language)
-        print("Analyzing sentiments")
-        tweets = sentiment_analysis.run(tweets, language)
-        insert_tweets(tweets)
+    # Process Tweets - Consume messages from Kafka
+    # TODO: Should produce a message in another Kafka topic for each tweet processed
+    records = []
+    for raw_tweet in raw_tweets:
+        records.append(process_tweet(raw_tweet))
+        # upload_avro(tweets)
+    insert_tweets(records)
 
 
 if __name__ == "__main__":
