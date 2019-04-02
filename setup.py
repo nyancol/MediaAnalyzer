@@ -29,7 +29,12 @@ setup(
     url=URL,
     long_description=LONG_DESCRIPTION,
     packages=find_packages(),
-    entry_points={},
+    entry_points={
+        "publisher_select": "media_analyzer.core.pull:select_publishers",
+        "pull": "media_analyzer.core.pull:pull_tweets",
+        "process": "media_analyzer.core.process:main",
+        "store": "media_analyzer.core.store:main",
+    },
     python_requires=">=3.6",
     install_requires=requirements,
     include_package_data=True,

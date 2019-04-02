@@ -7,16 +7,19 @@ name = "pypi"
 tweepy = "*"
 pip = "==18.0"
 numpy = "*"
-spacy = "*"
 nltk = "*"
 "psycopg2" = "*"
 flask = "*"
 sklearn = "*"
 geopy = "*"
+fastavro = "*"
+spacy = "*"
+pika = "*"
 
 [dev-packages]
 pytest = "*"
 "boto3" = "*"
+mypy = "*"
 
 [requires]
 python_version = "3.6"
