@@ -30,10 +30,12 @@ setup(
     long_description=LONG_DESCRIPTION,
     packages=find_packages(),
     entry_points={
-        "publisher_select": "media_analyzer.core.pull:select_publishers",
-        "pull": "media_analyzer.core.pull:pull_tweets",
-        "process": "media_analyzer.core.process:main",
-        "store": "media_analyzer.core.store:main",
+        "console_scripts": [
+            "publisher_select=media_analyzer.core.pull:select_publishers",
+            "pull_tweets=media_analyzer.core.pull:pull_tweets",
+            "process_tweets=media_analyzer.core.process:main",
+            "store_records=media_analyzer.core.store:main",
+        ]
     },
     python_requires=">=3.6",
     install_requires=requirements,
