@@ -1,6 +1,7 @@
 import contextlib
 from configparser import ConfigParser
 import psycopg2
+from media_analyzer import exceptions
 
 
 def config(filename='media_analyzer/database.ini', section='postgresql'):
@@ -26,7 +27,7 @@ def connection():
         conn = psycopg2.connect(**params)
         yield conn
     except psycopg2.DatabaseError as error:
-        print(error)
+        raise exceptions.DatabaseConnectionError(error) from error
     finally:
         if conn is not None:
             conn.close()
