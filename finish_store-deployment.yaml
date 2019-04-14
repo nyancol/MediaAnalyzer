@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: store-deployment
+  labels:
+    app: store
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: store
+  template:
+    metadata:
+      labels:
+        app: store
+    spec:
+      containers:
+      - name: store
+        image: media-analyzer
+        args: ["store", "--queue-ip", "10.104.62.20",
+                        "--postgres-ip", "192.168.1.11",
+                        "--batch-size", "1"]
+        imagePullPolicy: Never

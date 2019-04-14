@@ -1,0 +1,29 @@
+FROM python:3.6-alpine
+
+RUN apk --no-cache add --virtual .builddeps \
+    gcc \
+    postgresql-dev \
+    gfortran \
+    musl-dev \
+    libpq \
+    g++
+
+COPY requirements.txt /
+RUN pip install -r requirements.txt
+
+# && pip3 install *.whl \
+# && apk del .builddeps \
+# && rm -rf /root/.cache \
+# && rm -f *.whl
+
+RUN apk --no-cache add git
+
+COPY . /MediaAnalyser
+COPY .git /MediaAnalyser
+
+WORKDIR /MediaAnalyser
+RUN python setup.py install
+
+COPY ./media_analyzer/api_keys.ini /usr/local/lib/python3.6/site-packages/media_analyzer/
+COPY docker-entrypoint.sh /
+ENTRYPOINT ["/docker-entrypoint.sh"]

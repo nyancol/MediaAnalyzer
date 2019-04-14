@@ -1,0 +1,153 @@
+apiVersion: v1
+kind: Service
+metadata:
+    name: postgres
+spec:
+    ports:
+        - protocol: TCP
+          port: 5432
+          targetPort: 5432
+---
+apiVersion: v1
+kind: Endpoints
+metadata:
+    name: postgres
+subsets:
+    - addresses:
+        - ip: 192.168.122.1
+      ports:
+        - port: 5432
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rabbitmq
+  labels:
+    app: rabbitmq
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rabbitmq
+  template:
+    metadata:
+      labels:
+         app: rabbitmq
+    spec:
+      containers:
+      - image: rabbitmq:3.7-management-alpine
+        name: rabbit-mq
+        ports:
+        - containerPort: 15671
+        - containerPort: 5671
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: rabbitmq-dashboard
+spec:
+  selector:
+    app: rabbitmq
+  type: NodePort
+  ports:
+  - name: http
+    protocol: TCP
+    port: 15672
+    targetPort: 15672
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: rabbitmq
+spec:
+  selector:
+    app: rabbitmq
+  ports:
+  - name: amqp
+    protocol: TCP
+    port: 5672
+    targetPort: 5672
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: publisher
+spec:
+  template:
+    spec:
+      containers:
+      - name: publisher
+        image: media-analyzer
+        args: ["publishers", "--queue-ip", "10.104.62.20",
+                             "--postgres-ip", "192.168.1.11"]
+        imagePullPolicy: Never
+      restartPolicy: Never
+  backoffLimit: 4
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: puller-deployment
+  labels:
+    app: puller
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: puller
+  template:
+    metadata:
+      labels:
+        app: puller
+    spec:
+      containers:
+      - name: puller
+        image: media-analyzer
+        args: ["pull", "--queue-ip", "10.104.62.20",
+                       "--postgres-ip", "192.168.1.11"]
+        imagePullPolicy: Never
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: process-deployment
+  labels:
+    app: process
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: process
+  template:
+    metadata:
+      labels:
+        app: process
+    spec:
+      containers:
+      - name: process
+        image: media-analyzer
+        args: ["process", "--queue-ip", "10.104.62.20",
+                          "--postgres-ip", "192.168.1.11"]
+        imagePullPolicy: Never
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: store-deployment
+  labels:
+    app: store
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: store
+  template:
+    metadata:
+      labels:
+        app: store
+    spec:
+      containers:
+      - name: store
+        image: media-analyzer
+        args: ["store", "--queue-ip", "10.104.62.20",
+                        "--postgres-ip", "192.168.1.11"]
+        imagePullPolicy: Never
