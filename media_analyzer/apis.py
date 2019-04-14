@@ -1,4 +1,5 @@
 from configparser import ConfigParser
+from pathlib import Path
 from functools import wraps
 import tweepy
 import boto3
@@ -14,7 +15,8 @@ def readconfig(f):
     def wrapper():
         section = f.__name__.split('_')[1]
         config = ConfigParser()
-        config.read("media_analyzer/api_keys.ini")
+        config_file = Path(__file__).parent / "api_keys.ini"
+        config.read(config_file.as_posix())
         options = config.options(section)
         return f(dict({(option, config.get(section, option)) for option in options}))
     return wrapper

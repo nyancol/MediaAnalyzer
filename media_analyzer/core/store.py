@@ -1,3 +1,4 @@
+import argparse
 import pickle
 import uuid
 import io
@@ -5,10 +6,10 @@ import fastavro
 
 from media_analyzer import database
 from media_analyzer import apis
+from media_analyzer import queue
 
 
-def store_records():
-    BATCH_SIZE = 100
+def store_records(rabbit_ip="localhost", postgres_ip="localhost", batch_size=100):
     records = []
 
     def insert_records(records):
@@ -16,7 +17,7 @@ def store_records():
                                      original_screen_name, raw)
                  VALUES (%(id)s, %(publisher)s, %(language)s, %(created_at)s,
                          %(text)s, %(original_screen_name)s, %(raw)s);"""
-        with database.connection() as conn:
+        with database.connection(postgres_ip) as conn:
             cur = conn.cursor()
             cur.executemany(sql, records)
             cur.close()
@@ -25,13 +26,13 @@ def store_records():
     def callback(chn, method, properties, body):
         record = pickle.loads(body)
         records.append(record)
-        if len(records) >= BATCH_SIZE:
+        if len(records) >= batch_size:
             print(f"Inserting {len(records)} records")
             insert_records(records)
             records.clear()
             chn.basic_ack(delivery_tag=method.delivery_tag, multiple=True)
 
-    with queue.connection() as conn:
+    with queue.connection(rabbit_ip) as conn:
         channel = conn.channel()
         channel.basic_consume(queue="records", on_message_callback=callback)
         channel.start_consuming()
@@ -63,29 +64,14 @@ def upload_avro(tweets):
     resource.upload_fileobj(bytes_array, bucket_name=bucket, key=file_name)
 
 
-def finish_store():
-    def insert_records(records):
-        sql = """INSERT INTO tweets (id, publisher, language, created_at, text,
-                                     original_screen_name, raw)
-                 VALUES (%(id)s, %(publisher)s, %(language)s, %(created_at)s,
-                         %(text)s, %(original_screen_name)s, %(raw)s);"""
-        print(f"Inserting {len(records)} processed tweets")
-        with database.connection() as conn:
-            cur = conn.cursor()
-            cur.executemany(sql, records)
-            cur.close()
-            conn.commit()
-
-    def callback(chn, method, properties, body):
-        record = pickle.loads(body)
-        insert_records([record])
-        chn.basic_ack(delivery_tag=method.delivery_tag)
-
-    with queue.connection() as conn:
-        channel = conn.channel()
-        channel.basic_consume(queue="records", on_message_callback=callback)
-        channel.start_consuming()
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--queue-ip", help="Rabbitmq IP", required=True)
+    parser.add_argument("--postgres-ip", help="Postgresql IP", required=True)
+    parser.add_argument("--batch-size", help="Batch Size", default=100, type=int)
+    args = parser.parse_args()
+    store_records(args.queue_ip, args.postgres_ip, args.batch_size)
 
 
 if __name__ == "__main__":
-    store_records()
+    main()

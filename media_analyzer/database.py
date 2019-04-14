@@ -1,10 +1,14 @@
 import contextlib
+from pathlib import Path
 from configparser import ConfigParser
 import psycopg2
 from media_analyzer import exceptions
 
 
-def config(filename='media_analyzer/database.ini', section='postgresql'):
+filename = (Path(__file__).parent / "database.ini").as_posix()
+
+
+def config(filename=filename, section='postgresql'):
     parser = ConfigParser()
     parser.read(filename)
 
@@ -19,11 +23,12 @@ def config(filename='media_analyzer/database.ini', section='postgresql'):
 
 
 @contextlib.contextmanager
-def connection():
+def connection(host="localhost"):
     """ Connect to the PostgreSQL database server """
     conn = None
     try:
         params = config()
+        params["host"] = host
         conn = psycopg2.connect(**params)
         yield conn
     except psycopg2.DatabaseError as error:
@@ -96,7 +101,7 @@ def drop_tables():
 
 
 def get_publishers():
-    with database.connection() as conn:
+    with connection() as conn:
         cur = conn.cursor()
         cur.execute("SELECT DISTINCT publisher FROM tweets;")
         rows = cur.fetchall()

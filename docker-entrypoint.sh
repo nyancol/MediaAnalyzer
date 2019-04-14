@@ -1,19 +1,23 @@
-#!/bin/bash
+#!/bin/sh
 
 case $1 in
     publishers)
-        publisher_select
+        shift
+        publisher_select $@
         ;;
     pull)
-        pull_tweets
+        shift
+        pull_tweets $@
         ;;
     process)
-        process_tweets
+        shift
+        process_tweets $@
         ;;
     store)
-        store_records
+        shift
+        store_records $@
         ;;
     *)
-      exit 1
-      ;;
+        exit 1
+        ;;
 esac

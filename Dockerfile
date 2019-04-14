@@ -2,29 +2,32 @@ FROM kennethreitz/pipenv as build
 
 ADD . /media_analyzer
 WORKDIR /media_analyzer
-RUN pipenv install --dev \
+
+# RUN apt-get update && apt-get install -y libpq-dev
+
+RUN pipenv install \
  && pipenv lock -r > requirements.txt \
  && pipenv run python setup.py bdist_wheel
 
 # ----------------------------------------------------------------------------
-FROM ubuntu:bionic
+FROM python:3.6-alpine
 
-ARG DEBIAN_FRONTEND=noninteractive
+# ARG DEBIAN_FRONTEND=noninteractive
 
-COPY --from=pipenv /media_analyzer/dist/*.whl .
+COPY --from=build /media_analyzer/dist/*.whl ./
 
-RUN set -xe \
- && apt-get update -q \
- && apt-get install -y -q \
-        python3-minimal \
-        python3-wheel \
-        python3-pip \
- && python3 -m pip install *.whl \
- && apt-get remove -y python3-pip python3-wheel \
- && apt-get autoremove -y \
- && apt-get clean -y \
- && rm -f *.whl \
+RUN apk --no-cache add --virtual .builddeps \
+    gcc \
+    postgresql-dev \
+    gfortran \
+    musl-dev \
+    libpq \
+    g++ \
+ && pip3 install *.whl \
+ && apk del .builddeps \
  && rm -rf /root/.cache \
- && rm -rf /var/lib/apt/lists/*
+ && rm -f *.whl
 
+COPY docker-entrypoint.sh /
 ENTRYPOINT ["/docker-entrypoint.sh"]
+CMD ["pull"]
