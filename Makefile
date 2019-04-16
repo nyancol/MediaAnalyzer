@@ -3,6 +3,12 @@ TAG=$$(git log -1 --pretty=%h)
 IMG=${NAME}:${TAG}
 LATEST=${NAME}:latest
 
+infra:
+	kubectl apply -f infrastructure.yaml
+
+processing:
+	kubectl apply -f processing.yaml
+
 build: Dockerfile
 	# @docker build -t ${IMG} -f Dockerfile.build .
 	@docker build -t ${IMG} .

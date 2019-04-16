@@ -3,19 +3,19 @@
 case $1 in
     publishers)
         shift
-        publisher_select $@
+        publisher_select --queue-ip $RABBITMQ_SERVICE_HOST $@
         ;;
     pull)
         shift
-        pull_tweets $@
+        pull_tweets --queue-ip $RABBITMQ_SERVICE_HOST $@
         ;;
     process)
         shift
-        process_tweets $@
+        process_tweets --queue-ip $RABBITMQ_SERVICE_HOST $@
         ;;
     store)
         shift
-        store_records $@
+        store_records --queue-ip $RABBITMQ_SERVICE_HOST $@
         ;;
     *)
         exit 1

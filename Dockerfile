@@ -16,17 +16,18 @@ FROM python:3.6-alpine
 
 COPY --from=build /media_analyzer/dist/*.whl ./
 
+RUN apk --no-cache add libpq
 RUN apk --no-cache add --virtual .builddeps \
     gcc \
     postgresql-dev \
     gfortran \
     musl-dev \
-    libpq \
     g++ \
  && pip3 install *.whl \
  && apk del .builddeps \
  && rm -rf /root/.cache \
  && rm -f *.whl
+
 
 COPY docker-entrypoint.sh /
 ENTRYPOINT ["/docker-entrypoint.sh"]
