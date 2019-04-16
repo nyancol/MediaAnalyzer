@@ -1,17 +1,26 @@
 import pika
+from time import sleep
 import contextlib
 from media_analyzer import exceptions
 
 
 @contextlib.contextmanager
-def connection(rabbit_ip="localhost"):
-    try:
-        conn = pika.BlockingConnection(pika.ConnectionParameters(rabbit_ip))
-    except pika.exceptions.AMQPConnectionError as err:
+def connection(rabbit_ip="localhost", retry=3):
+    timeout = 30
+    conn = None
+    error = None
+    while retry >= 0 and conn is None:
+        try:
+            conn = pika.BlockingConnection(pika.ConnectionParameters(rabbit_ip))
+        except pika.exceptions.AMQPConnectionError as err:
+            retry -= 1
+            error = err
+            sleep(timeout)
+    if conn is None:
         msg = "Failed when creating a connection to RabbitMQ"
-        raise exceptions.RabbitMQException(msg) from err
-
-    yield conn
+        raise exceptions.RabbitMQException(msg) from error
+    else:
+        yield conn
     conn.close()
 
 
