@@ -3,10 +3,10 @@ TAG=$$(git log -1 --pretty=%h)
 IMG=${NAME}:${TAG}
 LATEST=${NAME}:latest
 
-infra:
-	kubectl apply -f infrastructure.yaml
-
 processing:
+	kubectl apply -f infrastructure.yaml
+	-kubectl delete job publisher
+	sleep 15
 	kubectl apply -f processing.yaml
 
 build: Dockerfile
