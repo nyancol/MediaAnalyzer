@@ -3,32 +3,39 @@ import pickle
 import uuid
 import io
 import fastavro
+import psycopg2.errors
 
 from media_analyzer import database
 from media_analyzer import apis
 from media_analyzer import queue
+from media_analyzer import exceptions
 
 
 def store_records(rabbit_ip="localhost", postgres_ip="localhost", batch_size=100):
     records = []
 
-    def insert_records(records):
+    def insert_records(db_conn, records):
+        # except exceptions.DuplicateDBEntryException as err:
         sql = """INSERT INTO tweets (id, publisher, language, created_at, text,
-                                     original_screen_name, raw)
+                                     original_screen_name, raw, retweets, favorites)
                  VALUES (%(id)s, %(publisher)s, %(language)s, %(created_at)s,
-                         %(text)s, %(original_screen_name)s, %(raw)s);"""
-        with database.connection(postgres_ip) as conn:
-            cur = conn.cursor()
-            cur.executemany(sql, records)
-            cur.close()
-            conn.commit()
+                         %(text)s, %(original_screen_name)s, %(raw)s, %(retweets)s, %(favorites)s);"""
+        cur = db_conn.cursor()
+        for record in records:
+            try:
+                cur.execute(sql, record)
+            except psycopg2.errors.UniqueViolation as err:
+                db_conn.rollback()
+        cur.close()
+        db_conn.commit()
 
     def callback(chn, method, properties, body):
         record = pickle.loads(body)
         records.append(record)
         if len(records) >= batch_size:
             print(f"Inserting {len(records)} records")
-            insert_records(records)
+            with database.connection(postgres_ip) as db_conn:
+                insert_records(db_conn, records)
             records.clear()
             chn.basic_ack(delivery_tag=method.delivery_tag, multiple=True)
 
@@ -38,7 +45,7 @@ def store_records(rabbit_ip="localhost", postgres_ip="localhost", batch_size=100
         channel.start_consuming()
 
 
-def upload_avro(tweets):
+def upload_avro(records):
     schema = {
         "doc": "Tweets pulled and enriched",
         "name": "Media Analyzer",

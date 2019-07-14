@@ -40,6 +40,8 @@ def process_tweet(status, postgres_ip="localhost"):
              "text": status.text,
              "raw": json.dumps(status._json),
              "publisher": status.user.screen_name,
+             "retweets": status.retweet_count,
+             "favorites": status.favorite_count,
              "language": get_language(status.user.screen_name, postgres_ip),
              "original_screen_name": None,
             }
