@@ -1,6 +1,9 @@
 import argparse
 import pickle
 import tweepy
+from tweepy.error import TweepError
+from time import sleep
+import datetime
 
 from media_analyzer import database
 from media_analyzer import apis
@@ -27,8 +30,16 @@ def pull_tweets(rabbit_ip="localhost", postgres_ip="localhost"):
         api = apis.get_twitter()
         print(f"Publishing a tweets for {publisher}")
         statii = get_last_tweets(api, publisher, postgres_ip)
-        for status in statii:
-            chn.basic_publish(exchange="", routing_key="tweets", body=pickle.dumps(status))
+        now = datetime.datetime.utcnow()
+        try:
+            for status in statii:
+                if now - datetime.timedelta(hours=24) < status.created_at:
+                    continue
+                chn.basic_publish(exchange="", routing_key="tweets", body=pickle.dumps(status))
+        except tweepy.error.TweepError as err:
+            # In case reaches maximum number of requests, sleep for 15 min and retry
+            sleep(15 * 60)
+            return callback(chn, method, properties, body)
         chn.basic_ack(delivery_tag=method.delivery_tag)
 
     with queue.connection(rabbit_ip) as conn:
