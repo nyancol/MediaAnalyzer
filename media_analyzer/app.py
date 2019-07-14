@@ -1,5 +1,6 @@
 import numpy as np
 from datetime import datetime
+import time
 from flask import Flask
 from flask import Markup
 from flask import Flask, request
@@ -95,13 +96,91 @@ def search_engine():
     return render_template('search_engine.html', tokens_weekly_count=weekly_count, tokens=tokens)
 
 
+def get_token_evolution(token):
+    totals_view = """
+            CREATE VIEW totals AS
+                SELECT publisher, date_trunc('month', created_at) AS month, COUNT(*)
+                FROM tweets
+                GROUP BY publisher, month
+            """
+    tokens_view = """
+            CREATE MATERIALIZED VIEW tokenized_tweets AS
+                SELECT publishers.name AS publisher, date_trunc('month', created_at) AS month,
+                       to_tsvector('simple', unaccent(text)) AS tokens
+                FROM tweets
+                    JOIN publishers ON tweets.publisher = publishers.screen_name
+            WITH DATA
+        """
+    # tokens_view = """
+    #         CREATE MATERIALIZED VIEW tokenized_tweets AS
+    #             SELECT publishers.name AS publisher, date_trunc('month', created_at) AS month,
+    #                    to_tsvector(publishers.language::regconfig, unaccent(text)) AS tokens
+    #             FROM tweets
+    #                 JOIN publishers ON tweets.publisher = publishers.screen_name
+    #         WITH DATA
+    #     """
+    query = f"""
+           SELECT publisher, COUNT(*) AS matches, month
+           FROM tokenized_tweets
+           WHERE tokens @@ to_tsquery('{token}')
+           GROUP by publisher, month
+           ORDER BY publisher, month
+        """
+    # query = f"""
+    #     SELECT totals.month, totals.publisher,
+    #            CASE WHEN matching.count is NULL THEN 0 ELSE matching.count END AS matches, totals.count AS total
+    #     FROM (SELECT publisher, COUNT(*), month
+    #           FROM tokenized_tweets
+    #           WHERE tokens @@ to_tsquery('{token}')
+    #           GROUP by publisher, month) as matching
+    #         RIGHT OUTER JOIN totals ON matching.publisher = totals.publisher and matching.month = totals.month
+    #     ORDER BY totals.publisher, totals.month
+    # """
+    # query = f"""
+    #          SELECT total.month, total.publisher,
+    #                 CASE WHEN matching.count is NULL THEN 0 ELSE matching.count END AS matches,
+    #                 total.count AS total
+    #          FROM (SELECT publisher, count(*), date_trunc('month', created_at) AS month
+    #                FROM tweets JOIN publishers ON tweets.publisher = publishers.screen_name
+    #                WHERE to_tsvector(publishers.language::regconfig, unaccent(text)) @@ to_tsquery('{token}')
+    #                GROUP BY publisher, month) AS matching
+    #          RIGHT OUTER JOIN (SELECT publisher, date_trunc('month', created_at) AS month, COUNT(*)
+    #                            FROM tweets
+    #                            GROUP BY publisher, month) AS total
+    #          ON matching.publisher = total.publisher AND matching.month = total.month
+    #          ORDER BY total.publisher, total.month
+    #          """
+    with database.connection() as conn:
+        cur = conn.cursor()
+        cur.execute(query)
+        rows = cur.fetchall()
+        colnames = [desc[0] for desc in cur.description]
+        cur.close()
+    data = [dict(zip(colnames, row)) for row in rows]
+    for i, record in enumerate(data):
+        data[i]["month"] = record["month"].strftime('%Y-%m')
+    return data
+
+
+@app.route("/token_evolution", methods=["GET"])
+def token_evolution():
+    data = None
+    query = None
+    if "token" in request.args:
+        query = request.args["token"]
+        data = get_token_evolution(request.args["token"])
+        # data = [{"month": datetime(2018, 11, 1).strftime('%Y-%m'), "publisher": "a", "matches": 23, "total": 20},{"month": datetime(2018, 12, 1).strftime('%Y-%m'), "publisher": "a", "matches": 22, "total": 20},
+        #         {"month": datetime(2018, 10, 1).strftime('%Y-%m'), "publisher": "b", "matches": 4, "total": 20}, {"month": datetime(2018, 11, 1).strftime('%Y-%m'), "publisher": "b", "matches": 1, "total": 20}]
+    return render_template('token_evolution.html', data=data, query=query)
+
+
 def run_query(query):
     res = None
     with database.connection() as conn:
         cur = conn.cursor()
         cur.execute(query)
         res = cur.fetchall()
-    return res
+    return render_template('db_stats.html', query_text=query_response)
 
 
 @app.route('/db_stats')
@@ -152,4 +231,5 @@ def publishers_route():
 
 if __name__ == "__main__":
     app.run(host="127.0.0.1", port=8080)
+    # app.run(host="192.168.1.237", port=8080)
     # app.run(host="192.168.1.11", port=8080)

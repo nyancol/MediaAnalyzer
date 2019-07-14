@@ -1,0 +1,30 @@
+<meta charset="utf-8">
+<head>
+    <!-- import plugin script -->
+    <!-- <script src="static/Chart.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.3.0/Chart.bundle.js"></script>
+    <script src="http://google.github.io/palette.js/palette.js"></script>
+
+    <!-- import scripts -->
+    <script src="static/js/token_evolution.js" type="text/javascript"></script>
+
+    <title>Media Analyzer</title>
+</head>
+<body>
+    <form action="/token_evolution" method="get">
+      Query: <input type="text" name="token"><br>
+      <input type="submit" value="Submit">
+    </form>
+    <div class="dashboard">
+        <div class="dashboard__item">
+            <div class="card">
+                <canvas id="token_evolution"</canvas>
+            </div>
+        </div>
+    </div>
+    <script>
+        if ({{data|safe}} != null) {
+            draw_chart({{data|safe}});
+        }
+    </script>
+</body>

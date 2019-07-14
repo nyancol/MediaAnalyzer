@@ -2,6 +2,7 @@ import contextlib
 from pathlib import Path
 from configparser import ConfigParser
 import psycopg2
+import psycopg2.errors
 from media_analyzer import exceptions
 
 
@@ -31,6 +32,8 @@ def connection(host="localhost"):
         params["host"] = host
         conn = psycopg2.connect(**params)
         yield conn
+    except psycopg2.errors.UniqueViolation as error:
+        raise exceptions.DuplicateDBEntryException(error) from error
     except psycopg2.DatabaseError as error:
         raise exceptions.DatabaseConnectionError(error) from error
     finally:
