@@ -24,11 +24,12 @@ def process_tweets(rabbit_ip="localhost", postgres_ip="localhost"):
         tweet = pickle.loads(body)
         record = process_tweet(tweet, postgres_ip)
         chn.basic_ack(delivery_tag=method.delivery_tag)
-        chn.basic_publish(exchange="", routing_key="records", body=pickle.dumps(record))
+        chn.basic_publish(exchange="records_router", routing_key="records", body=pickle.dumps(record))
 
     with queue.connection(rabbit_ip) as conn:
         channel = conn.channel()
-        channel.queue_declare(queue="records", durable=True)
+        channel.exchange_declare("records_router", exchange_type="fanout", durable=True)
+        # channel.queue_declare(queue="records", durable=True)
         channel.basic_consume(queue="tweets", on_message_callback=callback)
         channel.start_consuming()
 
@@ -38,7 +39,7 @@ def process_tweet(status, postgres_ip="localhost"):
              "id": status.id,
              "created_at": status.created_at,
              "text": status.text,
-             "raw": json.dumps(status._json),
+             "raw": status._json,
              "publisher": status.user.screen_name,
              "retweets": status.retweet_count,
              "favorites": status.favorite_count,

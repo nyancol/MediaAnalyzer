@@ -25,5 +25,6 @@ WORKDIR /MediaAnalyser
 RUN python setup.py install
 
 COPY ./media_analyzer/api_keys.ini /usr/local/lib/python3.6/site-packages/media_analyzer/
+COPY ./media_analyzer/core/tweet.avsc /usr/local/lib/python3.6/site-packages/media_analyzer/core/
 COPY docker-entrypoint.sh /
 ENTRYPOINT ["/docker-entrypoint.sh"]

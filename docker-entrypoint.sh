@@ -17,6 +17,10 @@ case $1 in
         shift
         store_records --queue-ip $RABBITMQ_SERVICE_HOST $@
         ;;
+    upload)
+        shift
+        upload_records --queue-ip $RABBITMQ_SERVICE_HOST $@
+        ;;
     *)
         exit 1
         ;;

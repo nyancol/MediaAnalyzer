@@ -8,8 +8,7 @@ spec:
       containers:
       - name: publisher
         image: media-analyzer
-        args: ["publishers", "--queue-ip", "10.100.148.223",
-                             "--postgres-ip", "192.168.1.11"]
+        args: ["publishers", "--postgres-ip", "192.168.39.1"]
         imagePullPolicy: Never
       restartPolicy: Never
   backoffLimit: 4
@@ -17,7 +16,7 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: puller-deployment
+  name: puller
   labels:
     app: puller
 spec:
@@ -33,14 +32,13 @@ spec:
       containers:
       - name: puller
         image: media-analyzer
-        args: ["pull", "--queue-ip", "10.100.148.223",
-                       "--postgres-ip", "192.168.1.11"]
+        args: ["pull", "--postgres-ip", "192.168.39.1"]
         imagePullPolicy: Never
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: process-deployment
+  name: process
   labels:
     app: process
 spec:
@@ -56,14 +54,13 @@ spec:
       containers:
       - name: process
         image: media-analyzer
-        args: ["process", "--queue-ip", "10.100.148.223",
-                          "--postgres-ip", "192.168.1.11"]
+        args: ["process", "--postgres-ip", "192.168.39.1"]
         imagePullPolicy: Never
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: store-deployment
+  name: store
   labels:
     app: store
 spec:
@@ -79,6 +76,27 @@ spec:
       containers:
       - name: store
         image: media-analyzer
-        args: ["store", "--queue-ip", "10.100.148.223",
-                        "--postgres-ip", "192.168.1.11"]
+        args: ["store", "--postgres-ip", "192.168.39.1"]
+        imagePullPolicy: Never
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: upload
+  labels:
+    app: upload
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: upload
+  template:
+    metadata:
+      labels:
+        app: upload
+    spec:
+      containers:
+      - name: upload
+        image: media-analyzer
+        args: ["upload"]
         imagePullPolicy: Never

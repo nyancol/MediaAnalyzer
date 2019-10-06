@@ -1,0 +1,1492 @@
+[
+    {
+        "created_at": 1570244652,
+        "favorites": 356,
+        "id": 1180317737308098560,
+        "language": "spanish",
+        "original_screen_name": null,
+        "publisher": "ExpresoPeru",
+        "raw": {
+            "contributors": null,
+            "coordinates": null,
+            "created_at": "Sat Oct 05 03:04:12 +0000 2019",
+            "entities": {
+                "hashtags": [],
+                "media": [
+                    {
+                        "display_url": "pic.twitter.com/XJuiEJegG7",
+                        "expanded_url": "https://twitter.com/ExpresoPeru/status/1180317737308098560/photo/1",
+                        "id": 1180317730584584192,
+                        "id_str": "1180317730584584192",
+                        "indices": [
+                            107,
+                            130
+                        ],
+                        "media_url": "http://pbs.twimg.com/media/EGFUuO2W4AAkZOw.jpg",
+                        "media_url_https": "https://pbs.twimg.com/media/EGFUuO2W4AAkZOw.jpg",
+                        "sizes": {
+                            "large": {
+                                "h": 1003,
+                                "resize": "fit",
+                                "w": 794
+                            },
+                            "medium": {
+                                "h": 1003,
+                                "resize": "fit",
+                                "w": 794
+                            },
+                            "small": {
+                                "h": 680,
+                                "resize": "fit",
+                                "w": 538
+                            },
+                            "thumb": {
+                                "h": 150,
+                                "resize": "crop",
+                                "w": 150
+                            }
+                        },
+                        "type": "photo",
+                        "url": "https://t.co/XJuiEJegG7"
+                    }
+                ],
+                "symbols": [],
+                "urls": [
+                    {
+                        "display_url": "expreso.com.pe",
+                        "expanded_url": "http://www.expreso.com.pe",
+                        "indices": [
+                            83,
+                            106
+                        ],
+                        "url": "https://t.co/X9TmzC4Rzj"
+                    }
+                ],
+                "user_mentions": []
+            },
+            "extended_entities": {
+                "media": [
+                    {
+                        "display_url": "pic.twitter.com/XJuiEJegG7",
+                        "expanded_url": "https://twitter.com/ExpresoPeru/status/1180317737308098560/photo/1",
+                        "id": 1180317730584584192,
+                        "id_str": "1180317730584584192",
+                        "indices": [
+                            107,
+                            130
+                        ],
+                        "media_url": "http://pbs.twimg.com/media/EGFUuO2W4AAkZOw.jpg",
+                        "media_url_https": "https://pbs.twimg.com/media/EGFUuO2W4AAkZOw.jpg",
+                        "sizes": {
+                            "large": {
+                                "h": 1003,
+                                "resize": "fit",
+                                "w": 794
+                            },
+                            "medium": {
+                                "h": 1003,
+                                "resize": "fit",
+                                "w": 794
+                            },
+                            "small": {
+                                "h": 680,
+                                "resize": "fit",
+                                "w": 538
+                            },
+                            "thumb": {
+                                "h": 150,
+                                "resize": "crop",
+                                "w": 150
+                            }
+                        },
+                        "type": "photo",
+                        "url": "https://t.co/XJuiEJegG7"
+                    }
+                ]
+            },
+            "favorite_count": 356,
+            "favorited": false,
+            "geo": null,
+            "id": 1180317737308098560,
+            "id_str": "1180317737308098560",
+            "in_reply_to_screen_name": null,
+            "in_reply_to_status_id": null,
+            "in_reply_to_status_id_str": null,
+            "in_reply_to_user_id": null,
+            "in_reply_to_user_id_str": null,
+            "is_quote_status": false,
+            "lang": "es",
+            "place": null,
+            "possibly_sensitive": false,
+            "retweet_count": 257,
+            "retweeted": false,
+            "source": "<a href=\"https://mobile.twitter.com\" rel=\"nofollow\">Twitter Web App</a>",
+            "text": "\ud83d\uddde\ufe0f \u00a1Esta es nuestra portada para el s\u00e1bado 5 de octubre!\n\nMantente informado en \u27a1\ufe0f https://t.co/X9TmzC4Rzj https://t.co/XJuiEJegG7",
+            "truncated": false,
+            "user": {
+                "contributors_enabled": false,
+                "created_at": "Sat Dec 11 01:55:08 +0000 2010",
+                "default_profile": false,
+                "default_profile_image": false,
+                "description": "Diario peruano de opini\u00f3n | Fundado en 1961",
+                "entities": {
+                    "description": {
+                        "urls": []
+                    },
+                    "url": {
+                        "urls": [
+                            {
+                                "display_url": "expreso.com.pe",
+                                "expanded_url": "http://www.expreso.com.pe",
+                                "indices": [
+                                    0,
+                                    22
+                                ],
+                                "url": "http://t.co/OqgZhokZR0"
+                            }
+                        ]
+                    }
+                },
+                "favourites_count": 82,
+                "follow_request_sent": null,
+                "followers_count": 116858,
+                "following": null,
+                "friends_count": 624,
+                "geo_enabled": true,
+                "has_extended_profile": false,
+                "id": 225232891,
+                "id_str": "225232891",
+                "is_translation_enabled": false,
+                "is_translator": false,
+                "lang": null,
+                "listed_count": 439,
+                "location": "Per\u00fa",
+                "name": "Diario Expreso Per\u00fa",
+                "notifications": null,
+                "profile_background_color": "022330",
+                "profile_background_image_url": "http://abs.twimg.com/images/themes/theme15/bg.png",
+                "profile_background_image_url_https": "https://abs.twimg.com/images/themes/theme15/bg.png",
+                "profile_background_tile": false,
+                "profile_banner_url": "https://pbs.twimg.com/profile_banners/225232891/1567718235",
+                "profile_image_url": "http://pbs.twimg.com/profile_images/1157015908361154560/6Hi7PyYo_normal.jpg",
+                "profile_image_url_https": "https://pbs.twimg.com/profile_images/1157015908361154560/6Hi7PyYo_normal.jpg",
+                "profile_link_color": "0084B4",
+                "profile_sidebar_border_color": "A8C7F7",
+                "profile_sidebar_fill_color": "C0DFEC",
+                "profile_text_color": "333333",
+                "profile_use_background_image": true,
+                "protected": false,
+                "screen_name": "ExpresoPeru",
+                "statuses_count": 100340,
+                "time_zone": null,
+                "translator_type": "none",
+                "url": "http://t.co/OqgZhokZR0",
+                "utc_offset": null,
+                "verified": false
+            }
+        },
+        "retweets": 257,
+        "text": "\ud83d\uddde\ufe0f \u00a1Esta es nuestra portada para el s\u00e1bado 5 de octubre!\n\nMantente informado en \u27a1\ufe0f https://t.co/X9TmzC4Rzj https://t.co/XJuiEJegG7"
+    },
+    {
+        "created_at": 1570236703,
+        "favorites": 82,
+        "id": 1180284397255307265,
+        "language": "spanish",
+        "original_screen_name": null,
+        "publisher": "ExpresoPeru",
+        "raw": {
+            "contributors": null,
+            "coordinates": null,
+            "created_at": "Sat Oct 05 00:51:43 +0000 2019",
+            "entities": {
+                "hashtags": [],
+                "symbols": [],
+                "urls": [
+                    {
+                        "display_url": "twitter.com/i/web/status/1u2026",
+                        "expanded_url": "https://twitter.com/i/web/status/1180284397255307265",
+                        "indices": [
+                            117,
+                            140
+                        ],
+                        "url": "https://t.co/ipDpjlWUkN"
+                    }
+                ],
+                "user_mentions": []
+            },
+            "favorite_count": 82,
+            "favorited": false,
+            "geo": null,
+            "id": 1180284397255307265,
+            "id_str": "1180284397255307265",
+            "in_reply_to_screen_name": null,
+            "in_reply_to_status_id": null,
+            "in_reply_to_status_id_str": null,
+            "in_reply_to_user_id": null,
+            "in_reply_to_user_id_str": null,
+            "is_quote_status": false,
+            "lang": "es",
+            "place": null,
+            "possibly_sensitive": false,
+            "retweet_count": 26,
+            "retweeted": false,
+            "source": "<a href=\"http://twitter.com\" rel=\"nofollow\">Twitter Web Client</a>",
+            "text": "Escritor tambiu00e9n saludu00f3 el apoyo de las Fuerzas Armadas y la Policu00eda Nacional a la polu00e9mica medida de Martu00edn Vizcaru2026 https://t.co/ipDpjlWUkN",
+            "truncated": true,
+            "user": {
+                "contributors_enabled": false,
+                "created_at": "Sat Dec 11 01:55:08 +0000 2010",
+                "default_profile": false,
+                "default_profile_image": false,
+                "description": "Diario peruano de opiniu00f3n | Fundado en 1961",
+                "entities": {
+                    "description": {
+                        "urls": []
+                    },
+                    "url": {
+                        "urls": [
+                            {
+                                "display_url": "expreso.com.pe",
+                                "expanded_url": "http://www.expreso.com.pe",
+                                "indices": [
+                                    0,
+                                    22
+                                ],
+                                "url": "http://t.co/OqgZhokZR0"
+                            }
+                        ]
+                    }
+                },
+                "favourites_count": 82,
+                "follow_request_sent": null,
+                "followers_count": 116858,
+                "following": null,
+                "friends_count": 624,
+                "geo_enabled": true,
+                "has_extended_profile": false,
+                "id": 225232891,
+                "id_str": "225232891",
+                "is_translation_enabled": false,
+                "is_translator": false,
+                "lang": null,
+                "listed_count": 439,
+                "location": "Peru00fa",
+                "name": "Diario Expreso Peru00fa",
+                "notifications": null,
+                "profile_background_color": "022330",
+                "profile_background_image_url": "http://abs.twimg.com/images/themes/theme15/bg.png",
+                "profile_background_image_url_https": "https://abs.twimg.com/images/themes/theme15/bg.png",
+                "profile_background_tile": false,
+                "profile_banner_url": "https://pbs.twimg.com/profile_banners/225232891/1567718235",
+                "profile_image_url": "http://pbs.twimg.com/profile_images/1157015908361154560/6Hi7PyYo_normal.jpg",
+                "profile_image_url_https": "https://pbs.twimg.com/profile_images/1157015908361154560/6Hi7PyYo_normal.jpg",
+                "profile_link_color": "0084B4",
+                "profile_sidebar_border_color": "A8C7F7",
+                "profile_sidebar_fill_color": "C0DFEC",
+                "profile_text_color": "333333",
+                "profile_use_background_image": true,
+                "protected": false,
+                "screen_name": "ExpresoPeru",
+                "statuses_count": 100340,
+                "time_zone": null,
+                "translator_type": "none",
+                "url": "http://t.co/OqgZhokZR0",
+                "utc_offset": null,
+                "verified": false
+            }
+        },
+        "retweets": 26,
+        "text": "Escritor tambi/gc/gu00e9n salud/gu00f3 el apoyo de las Fuerzas Armadas y la Policu00eda Nacional a la polu00e9mica medida de Martu00edn Vizcaru2026 https://t.co/ipDpjlWUkN"
+    },
+    {
+        "created_at": 1570216822,
+        "favorites": 10,
+        "id": 1180201011014701057,
+        "language": "spanish",
+        "original_screen_name": null,
+        "publisher": "ExpresoPeru",
+        "raw": {
+            "contributors": null,
+            "coordinates": null,
+            "created_at": "Fri Oct 04 19:20:22 +0000 2019",
+            "entities": {
+                "hashtags": [
+                    {
+                        "indices": [
+                            0,
+                            8
+                        ],
+                        "text": "OPINI\\u00d3N"
+                    }
+                ],
+                "symbols": [],
+                "urls": [
+                    {
+                        "display_url": "expreso.com.pe/opinion/ana-ja\\u2026",
+                        "expanded_url": "https://www.expreso.com.pe/opinion/ana-jara/por-la-salud-de-la-democracia/",
+                        "indices": [
+                            58,
+                            81
+                        ],
+                        "url": "https://t.co/07UzFoW0kJ"
+                    }
+                ],
+                "user_mentions": []
+            },
+            "favorite_count": 10,
+            "favorited": false,
+            "geo": null,
+            "id": 1180201011014701057,
+            "id_str": "1180201011014701057",
+            "in_reply_to_screen_name": null,
+            "in_reply_to_status_id": null,
+            "in_reply_to_status_id_str": null,
+            "in_reply_to_user_id": null,
+            "in_reply_to_user_id_str": null,
+            "is_quote_status": false,
+            "lang": "es",
+            "place": null,
+            "possibly_sensitive": false,
+            "retweet_count": 1,
+            "retweeted": false,
+            "source": "<a href=\"https://mobile.twitter.com\" rel=\"nofollow\">Twitter Web App</a>",
+            "text": "#OPINI\\u00d3N | Por la salud de la democracia, por Ana Jara \\u270d\\ufe0f\\nhttps://t.co/07UzFoW0kJ",
+            "truncated": false,
+            "user": {
+                "contributors_enabled": false,
+                "created_at": "Sat Dec 11 01:55:08 +0000 2010",
+                "default_profile": false,
+                "default_profile_image": false,
+                "description": "Diario peruano de opini\\u00f3n | Fundado en 1961",
+                "entities": {
+                    "description": {
+                        "urls": []
+                    },
+                    "url": {
+                        "urls": [
+                            {
+                                "display_url": "expreso.com.pe",
+                                "expanded_url": "http://www.expreso.com.pe",
+                                "indices": [
+                                    0,
+                                    22
+                                ],
+                                "url": "http://t.co/OqgZhokZR0"
+                            }
+                        ]
+                    }
+                },
+                "favourites_count": 82,
+                "follow_request_sent": null,
+                "followers_count": 116858,
+                "following": null,
+                "friends_count": 624,
+                "geo_enabled": true,
+                "has_extended_profile": false,
+                "id": 225232891,
+                "id_str": "225232891",
+                "is_translation_enabled": false,
+                "is_translator": false,
+                "lang": null,
+                "listed_count": 439,
+                "location": "Per\\u00fa",
+                "name": "Diario Expreso Per\\u00fa",
+                "notifications": null,
+                "profile_background_color": "022330",
+                "profile_background_image_url": "http://abs.twimg.com/images/themes/theme15/bg.png",
+                "profile_background_image_url_https": "https://abs.twimg.com/images/themes/theme15/bg.png",
+                "profile_background_tile": false,
+                "profile_banner_url": "https://pbs.twimg.com/profile_banners/225232891/1567718235",
+                "profile_image_url": "http://pbs.twimg.com/profile_images/1157015908361154560/6Hi7PyYo_normal.jpg",
+                "profile_image_url_https": "https://pbs.twimg.com/profile_images/1157015908361154560/6Hi7PyYo_normal.jpg",
+                "profile_link_color": "0084B4",
+                "profile_sidebar_border_color": "A8C7F7",
+                "profile_sidebar_fill_color": "C0DFEC",
+                "profile_text_color": "333333",
+                "profile_use_background_image": true,
+                "protected": false,
+                "screen_name": "ExpresoPeru",
+                "statuses_count": 100340,
+                "time_zone": null,
+                "translator_type": "none",
+                "url": "http://t.co/OqgZhokZR0",
+                "utc_offset": null,
+                "verified": false
+            }
+        },
+        "retweets": 1,
+        "text": "#OPINI\\u00d3N | Por la salud de la democracia, por Ana Jara \\u270d\\ufe0f\\nhttps://t.co/07UzFoW0kJ"
+    },
+    {
+        "created_at": 1570278004,
+        "favorites": 0,
+        "id": 1180457626053828609,
+        "language": "spanish",
+        "original_screen_name": null,
+        "publisher": "ElUniversal",
+        "raw": {
+            "contributors": null,
+            "coordinates": null,
+            "created_at": "Sat Oct 05 12:20:04 +0000 2019",
+            "entities": {
+                "hashtags": [
+                    {
+                        "indices": [
+                            82,
+                            90
+                        ],
+                        "text": "Opini\\u00f3n"
+                    }
+                ],
+                "symbols": [],
+                "urls": [
+                    {
+                        "display_url": "ow.ly/7XML30pFuoc",
+                        "expanded_url": "http://ow.ly/7XML30pFuoc",
+                        "indices": [
+                            91,
+                            114
+                        ],
+                        "url": "https://t.co/CE7qIh1dgE"
+                    }
+                ],
+                "user_mentions": [
+                    {
+                        "id": 110985579,
+                        "id_str": "110985579",
+                        "indices": [
+                            70,
+                            81
+                        ],
+                        "name": "Alberto Jos\\u00e9 Hurtado B.",
+                        "screen_name": "ajhurtadob"
+                    }
+                ]
+            },
+            "favorite_count": 0,
+            "favorited": false,
+            "geo": null,
+            "id": 1180457626053828609,
+            "id_str": "1180457626053828609",
+            "in_reply_to_screen_name": null,
+            "in_reply_to_status_id": null,
+            "in_reply_to_status_id_str": null,
+            "in_reply_to_user_id": null,
+            "in_reply_to_user_id_str": null,
+            "is_quote_status": false,
+            "lang": "es",
+            "place": null,
+            "possibly_sensitive": false,
+            "retweet_count": 0,
+            "retweeted": false,
+            "source": "<a href=\"https://www.hootsuite.com\" rel=\"nofollow\">Hootsuite Inc.</a>",
+            "text": "'Fin del conflicto China-Estados Unidos', por Alberto Jose Hurtado B. @ajhurtadob #Opini\\u00f3n https://t.co/CE7qIh1dgE",
+            "truncated": false,
+            "user": {
+                "contributors_enabled": false,
+                "created_at": "Sun May 13 19:55:28 +0000 2007",
+                "default_profile": false,
+                "default_profile_image": false,
+                "description": "Solo noticias confirmadas. Los principales titulares de lo que ocurre en este momento en Venezuela y el mundo",
+                "entities": {
+                    "description": {
+                        "urls": []
+                    },
+                    "url": {
+                        "urls": [
+                            {
+                                "display_url": "eluniversal.com",
+                                "expanded_url": "http://www.eluniversal.com",
+                                "indices": [
+                                    0,
+                                    23
+                                ],
+                                "url": "https://t.co/cmnshv9C8M"
+                            }
+                        ]
+                    }
+                },
+                "favourites_count": 26,
+                "follow_request_sent": null,
+                "followers_count": 4980765,
+                "following": null,
+                "friends_count": 64165,
+                "geo_enabled": true,
+                "has_extended_profile": false,
+                "id": 6015212,
+                "id_str": "6015212",
+                "is_translation_enabled": true,
+                "is_translator": false,
+                "lang": null,
+                "listed_count": 20483,
+                "location": "Venezuela",
+                "name": "El Universal",
+                "notifications": null,
+                "profile_background_color": "F5CC13",
+                "profile_background_image_url": "http://abs.twimg.com/images/themes/theme1/bg.png",
+                "profile_background_image_url_https": "https://abs.twimg.com/images/themes/theme1/bg.png",
+                "profile_background_tile": false,
+                "profile_banner_url": "https://pbs.twimg.com/profile_banners/6015212/1531941381",
+                "profile_image_url": "http://pbs.twimg.com/profile_images/988501961011064832/VPWwPk2S_normal.jpg",
+                "profile_image_url_https": "https://pbs.twimg.com/profile_images/988501961011064832/VPWwPk2S_normal.jpg",
+                "profile_link_color": "F7A600",
+                "profile_sidebar_border_color": "FFFFFF",
+                "profile_sidebar_fill_color": "E6E6E6",
+                "profile_text_color": "4F4F4F",
+                "profile_use_background_image": true,
+                "protected": false,
+                "screen_name": "ElUniversal",
+                "statuses_count": 1427124,
+                "time_zone": null,
+                "translator_type": "none",
+                "url": "https://t.co/cmnshv9C8M",
+                "utc_offset": null,
+                "verified": true
+            }
+        },
+        "retweets": 0,
+        "text": "'Fin del conflicto China-Estados Unidos', por Alberto Jose Hurtado B. @ajhurtadob #Opini\\u00f3n https://t.co/CE7qIh1dgE"
+    },
+    {
+        "created_at": 1570234505,
+        "favorites": 12,
+        "id": 1180275179840249862,
+        "language": "spanish",
+        "original_screen_name": null,
+        "publisher": "ElUniversal",
+        "raw": {
+            "contributors": null,
+            "coordinates": null,
+            "created_at": "Sat Oct 05 00:15:05 +0000 2019",
+            "entities": {
+                "hashtags": [],
+                "symbols": [],
+                "urls": [
+                    {
+                        "display_url": "twitter.com/i/web/status/1\\u2026",
+                        "expanded_url": "https://twitter.com/i/web/status/1180275179840249862",
+                        "indices": [
+                            117,
+                            140
+                        ],
+                        "url": "https://t.co/9L74xxKko0"
+                    }
+                ],
+                "user_mentions": []
+            },
+            "favorite_count": 12,
+            "favorited": false,
+            "geo": null,
+            "id": 1180275179840249862,
+            "id_str": "1180275179840249862",
+            "in_reply_to_screen_name": null,
+            "in_reply_to_status_id": null,
+            "in_reply_to_status_id_str": null,
+            "in_reply_to_user_id": null,
+            "in_reply_to_user_id_str": null,
+            "is_quote_status": false,
+            "lang": "es",
+            "place": null,
+            "retweet_count": 6,
+            "retweeted": false,
+            "source": "<a href=\"https://www.hootsuite.com\" rel=\"nofollow\">Hootsuite Inc.</a>",
+            "text": "El cacao contribuye a mejorar la memoria y los procesos cognitivos. Si estas agotado, un poco de chocolate te ayuda\\u2026 https://t.co/9L74xxKko0",
+            "truncated": true,
+            "user": {
+                "contributors_enabled": false,
+                "created_at": "Sun May 13 19:55:28 +0000 2007",
+                "default_profile": false,
+                "default_profile_image": false,
+                "description": "Solo noticias confirmadas. Los principales titulares de lo que ocurre en este momento en Venezuela y el mundo",
+                "entities": {
+                    "description": {
+                        "urls": []
+                    },
+                    "url": {
+                        "urls": [
+                            {
+                                "display_url": "eluniversal.com",
+                                "expanded_url": "http://www.eluniversal.com",
+                                "indices": [
+                                    0,
+                                    23
+                                ],
+                                "url": "https://t.co/cmnshv9C8M"
+                            }
+                        ]
+                    }
+                },
+                "favourites_count": 26,
+                "follow_request_sent": null,
+                "followers_count": 4980765,
+                "following": null,
+                "friends_count": 64165,
+                "geo_enabled": true,
+                "has_extended_profile": false,
+                "id": 6015212,
+                "id_str": "6015212",
+                "is_translation_enabled": true,
+                "is_translator": false,
+                "lang": null,
+                "listed_count": 20483,
+                "location": "Venezuela",
+                "name": "El Universal",
+                "notifications": null,
+                "profile_background_color": "F5CC13",
+                "profile_background_image_url": "http://abs.twimg.com/images/themes/theme1/bg.png",
+                "profile_background_image_url_https": "https://abs.twimg.com/images/themes/theme1/bg.png",
+                "profile_background_tile": false,
+                "profile_banner_url": "https://pbs.twimg.com/profile_banners/6015212/1531941381",
+                "profile_image_url": "http://pbs.twimg.com/profile_images/988501961011064832/VPWwPk2S_normal.jpg",
+                "profile_image_url_https": "https://pbs.twimg.com/profile_images/988501961011064832/VPWwPk2S_normal.jpg",
+                "profile_link_color": "F7A600",
+                "profile_sidebar_border_color": "FFFFFF",
+                "profile_sidebar_fill_color": "E6E6E6",
+                "profile_text_color": "4F4F4F",
+                "profile_use_background_image": true,
+                "protected": false,
+                "screen_name": "ElUniversal",
+                "statuses_count": 1427124,
+                "time_zone": null,
+                "translator_type": "none",
+                "url": "https://t.co/cmnshv9C8M",
+                "utc_offset": null,
+                "verified": true
+            }
+        },
+        "retweets": 6,
+        "text": "El cacao contribuye a mejorar la memoria y los procesos cognitivos. Si estas agotado, un poco de chocolate te ayuda\\u2026 https://t.co/9L74xxKko0"
+    },
+    {
+        "created_at": 1570210090,
+        "favorites": 6,
+        "id": 1180172772636577792,
+        "language": "english",
+        "original_screen_name": null,
+        "publisher": "NBCPolitics",
+        "raw": {
+            "contributors": null,
+            "coordinates": null,
+            "created_at": "Fri Oct 04 17:28:10 +0000 2019",
+            "entities": {
+                "hashtags": [],
+                "symbols": [],
+                "urls": [
+                    {
+                        "display_url": "twitter.com/i/web/status/1\\u2026",
+                        "expanded_url": "https://twitter.com/i/web/status/1180172772636577792",
+                        "indices": [
+                            117,
+                            140
+                        ],
+                        "url": "https://t.co/OHUvKJU91F"
+                    }
+                ],
+                "user_mentions": []
+            },
+            "favorite_count": 6,
+            "favorited": false,
+            "geo": null,
+            "id": 1180172772636577792,
+            "id_str": "1180172772636577792",
+            "in_reply_to_screen_name": "NBCPolitics",
+            "in_reply_to_status_id": 1180172739933548544,
+            "in_reply_to_status_id_str": "1180172739933548544",
+            "in_reply_to_user_id": 11856032,
+            "in_reply_to_user_id_str": "11856032",
+            "is_quote_status": false,
+            "lang": "en",
+            "place": null,
+            "possibly_sensitive": false,
+            "retweet_count": 4,
+            "retweeted": false,
+            "source": "<a href=\"https://about.twitter.com/products/tweetdeck\" rel=\"nofollow\">TweetDeck</a>",
+            "text": "Acting White House Chief of Staff Mulvaney and Jared Kushner are trying to take the lead on the West Wing\\u2019s respons\\u2026 https://t.co/OHUvKJU91F",
+            "truncated": true,
+            "user": {
+                "contributors_enabled": false,
+                "created_at": "Fri Jan 04 22:09:18 +0000 2008",
+                "default_profile": false,
+                "default_profile_image": false,
+                "description": "Political news from the journalists across @NBCNews, @MSNBC, @TodayShow, @NBCNightlyNews, @MeetThePress, @NBCInvestigates and more.",
+                "entities": {
+                    "description": {
+                        "urls": []
+                    },
+                    "url": {
+                        "urls": [
+                            {
+                                "display_url": "NBCPolitics.com",
+                                "expanded_url": "http://www.NBCPolitics.com",
+                                "indices": [
+                                    0,
+                                    23
+                                ],
+                                "url": "https://t.co/aSm5RbuWs3"
+                            }
+                        ]
+                    }
+                },
+                "favourites_count": 819,
+                "follow_request_sent": null,
+                "followers_count": 511967,
+                "following": null,
+                "friends_count": 235,
+                "geo_enabled": false,
+                "has_extended_profile": false,
+                "id": 11856032,
+                "id_str": "11856032",
+                "is_translation_enabled": false,
+                "is_translator": false,
+                "lang": null,
+                "listed_count": 6668,
+                "location": "",
+                "name": "NBC Politics",
+                "notifications": null,
+                "profile_background_color": "062131",
+                "profile_background_image_url": "http://abs.twimg.com/images/themes/theme1/bg.png",
+                "profile_background_image_url_https": "https://abs.twimg.com/images/themes/theme1/bg.png",
+                "profile_background_tile": true,
+                "profile_banner_url": "https://pbs.twimg.com/profile_banners/11856032/1564622114",
+                "profile_image_url": "http://pbs.twimg.com/profile_images/1108427382925471744/1np2ube6_normal.png",
+                "profile_image_url_https": "https://pbs.twimg.com/profile_images/1108427382925471744/1np2ube6_normal.png",
+                "profile_link_color": "5172A0",
+                "profile_sidebar_border_color": "000000",
+                "profile_sidebar_fill_color": "EEEEEE",
+                "profile_text_color": "000000",
+                "profile_use_background_image": true,
+                "protected": false,
+                "screen_name": "NBCPolitics",
+                "statuses_count": 58436,
+                "time_zone": null,
+                "translator_type": "none",
+                "url": "https://t.co/aSm5RbuWs3",
+                "utc_offset": null,
+                "verified": true
+            }
+        },
+        "retweets": 4,
+        "text": "Acting White House Chief of Staff Mulvaney and Jared Kushner are trying to take the lead on the West Wing\\u2019s respons\\u2026 https://t.co/OHUvKJU91F"
+    },
+    {
+        "created_at": 1570280333,
+        "favorites": 43,
+        "id": 1180467393493123072,
+        "language": "italian",
+        "original_screen_name": null,
+        "publisher": "Adnkronos",
+        "raw": {
+            "contributors": null,
+            "coordinates": null,
+            "created_at": "Sat Oct 05 12:58:53 +0000 2019",
+            "entities": {
+                "hashtags": [
+                    {
+                        "indices": [
+                            0,
+                            8
+                        ],
+                        "text": "DjRingo"
+                    },
+                    {
+                        "indices": [
+                            11,
+                            17
+                        ],
+                        "text": "Rubio"
+                    }
+                ],
+                "media": [
+                    {
+                        "display_url": "pic.twitter.com/SphlUeTNYG",
+                        "expanded_url": "https://twitter.com/Adnkronos/status/1180467393493123072/photo/1",
+                        "id": 1180467387168120832,
+                        "id_str": "1180467387168120832",
+                        "indices": [
+                            62,
+                            85
+                        ],
+                        "media_url": "http://pbs.twimg.com/media/EGHc1ZEW4AAxJx3.jpg",
+                        "media_url_https": "https://pbs.twimg.com/media/EGHc1ZEW4AAxJx3.jpg",
+                        "sizes": {
+                            "large": {
+                                "h": 1229,
+                                "resize": "fit",
+                                "w": 2041
+                            },
+                            "medium": {
+                                "h": 723,
+                                "resize": "fit",
+                                "w": 1200
+                            },
+                            "small": {
+                                "h": 409,
+                                "resize": "fit",
+                                "w": 680
+                            },
+                            "thumb": {
+                                "h": 150,
+                                "resize": "crop",
+                                "w": 150
+                            }
+                        },
+                        "type": "photo",
+                        "url": "https://t.co/SphlUeTNYG"
+                    }
+                ],
+                "symbols": [],
+                "urls": [
+                    {
+                        "display_url": "bit.ly/2okJtgn",
+                        "expanded_url": "https://bit.ly/2okJtgn",
+                        "indices": [
+                            38,
+                            61
+                        ],
+                        "url": "https://t.co/Tt2Djsc3aa"
+                    }
+                ],
+                "user_mentions": []
+            },
+            "extended_entities": {
+                "media": [
+                    {
+                        "display_url": "pic.twitter.com/SphlUeTNYG",
+                        "expanded_url": "https://twitter.com/Adnkronos/status/1180467393493123072/photo/1",
+                        "id": 1180467387168120832,
+                        "id_str": "1180467387168120832",
+                        "indices": [
+                            62,
+                            85
+                        ],
+                        "media_url": "http://pbs.twimg.com/media/EGHc1ZEW4AAxJx3.jpg",
+                        "media_url_https": "https://pbs.twimg.com/media/EGHc1ZEW4AAxJx3.jpg",
+                        "sizes": {
+                            "large": {
+                                "h": 1229,
+                                "resize": "fit",
+                                "w": 2041
+                            },
+                            "medium": {
+                                "h": 723,
+                                "resize": "fit",
+                                "w": 1200
+                            },
+                            "small": {
+                                "h": 409,
+                                "resize": "fit",
+                                "w": 680
+                            },
+                            "thumb": {
+                                "h": 150,
+                                "resize": "crop",
+                                "w": 150
+                            }
+                        },
+                        "type": "photo",
+                        "url": "https://t.co/SphlUeTNYG"
+                    }
+                ]
+            },
+            "favorite_count": 43,
+            "favorited": false,
+            "geo": null,
+            "id": 1180467393493123072,
+            "id_str": "1180467393493123072",
+            "in_reply_to_screen_name": null,
+            "in_reply_to_status_id": null,
+            "in_reply_to_status_id_str": null,
+            "in_reply_to_user_id": null,
+            "in_reply_to_user_id_str": null,
+            "is_quote_status": false,
+            "lang": "it",
+            "place": null,
+            "possibly_sensitive": false,
+            "retweet_count": 8,
+            "retweeted": false,
+            "source": "<a href=\"https://mobile.twitter.com\" rel=\"nofollow\">Twitter Web App</a>",
+            "text": "#DjRingo: \"#Rubio doveva stare zitto\" https://t.co/Tt2Djsc3aa https://t.co/SphlUeTNYG",
+            "truncated": false,
+            "user": {
+                "contributors_enabled": false,
+                "created_at": "Sat Mar 21 14:08:56 +0000 2009",
+                "default_profile": false,
+                "default_profile_image": false,
+                "description": "Vuoi leggere altre notizie? Vieni sul nostro sito https://t.co/WNy21ZatVs",
+                "entities": {
+                    "description": {
+                        "urls": [
+                            {
+                                "display_url": "adnkronos.com",
+                                "expanded_url": "http://www.adnkronos.com",
+                                "indices": [
+                                    50,
+                                    73
+                                ],
+                                "url": "https://t.co/WNy21ZatVs"
+                            }
+                        ]
+                    },
+                    "url": {
+                        "urls": [
+                            {
+                                "display_url": "adnkronos.com",
+                                "expanded_url": "http://www.adnkronos.com",
+                                "indices": [
+                                    0,
+                                    22
+                                ],
+                                "url": "http://t.co/9TbKCdPvge"
+                            }
+                        ]
+                    }
+                },
+                "favourites_count": 468,
+                "follow_request_sent": null,
+                "followers_count": 436948,
+                "following": null,
+                "friends_count": 135,
+                "geo_enabled": true,
+                "has_extended_profile": false,
+                "id": 25676606,
+                "id_str": "25676606",
+                "is_translation_enabled": false,
+                "is_translator": false,
+                "lang": null,
+                "listed_count": 3730,
+                "location": "Italia",
+                "name": "Adnkronos",
+                "notifications": null,
+                "profile_background_color": "131516",
+                "profile_background_image_url": "http://abs.twimg.com/images/themes/theme14/bg.gif",
+                "profile_background_image_url_https": "https://abs.twimg.com/images/themes/theme14/bg.gif",
+                "profile_background_tile": true,
+                "profile_banner_url": "https://pbs.twimg.com/profile_banners/25676606/1400139477",
+                "profile_image_url": "http://pbs.twimg.com/profile_images/478852512561119232/zBIHmE1__normal.jpeg",
+                "profile_image_url_https": "https://pbs.twimg.com/profile_images/478852512561119232/zBIHmE1__normal.jpeg",
+                "profile_link_color": "3B94D9",
+                "profile_sidebar_border_color": "FFFFFF",
+                "profile_sidebar_fill_color": "EFEFEF",
+                "profile_text_color": "333333",
+                "profile_use_background_image": true,
+                "protected": false,
+                "screen_name": "Adnkronos",
+                "statuses_count": 237291,
+                "time_zone": null,
+                "translator_type": "none",
+                "url": "http://t.co/9TbKCdPvge",
+                "utc_offset": null,
+                "verified": true
+            }
+        },
+        "retweets": 8,
+        "text": "#DjRingo: \"#Rubio doveva stare zitto\" https://t.co/Tt2Djsc3aa https://t.co/SphlUeTNYG"
+    },
+    {
+        "created_at": 1570280120,
+        "favorites": 0,
+        "id": 1180466500836237312,
+        "language": "french",
+        "original_screen_name": null,
+        "publisher": "LesEchos",
+        "raw": {
+            "contributors": null,
+            "coordinates": null,
+            "created_at": "Sat Oct 05 12:55:20 +0000 2019",
+            "entities": {
+                "hashtags": [],
+                "symbols": [],
+                "urls": [
+                    {
+                        "display_url": "trib.al/9Y55I75",
+                        "expanded_url": "https://trib.al/9Y55I75",
+                        "indices": [
+                            61,
+                            84
+                        ],
+                        "url": "https://t.co/tjDSIK4BWv"
+                    }
+                ],
+                "user_mentions": []
+            },
+            "favorite_count": 0,
+            "favorited": false,
+            "geo": null,
+            "id": 1180466500836237312,
+            "id_str": "1180466500836237312",
+            "in_reply_to_screen_name": null,
+            "in_reply_to_status_id": null,
+            "in_reply_to_status_id_str": null,
+            "in_reply_to_user_id": null,
+            "in_reply_to_user_id_str": null,
+            "is_quote_status": false,
+            "lang": "fr",
+            "place": null,
+            "possibly_sensitive": false,
+            "retweet_count": 3,
+            "retweeted": false,
+            "source": "<a href=\"http://www.socialflow.com\" rel=\"nofollow\">SocialFlow</a>",
+            "text": "Transition \u00e9cologique : ce que peuvent faire les entreprises https://t.co/tjDSIK4BWv",
+            "truncated": false,
+            "user": {
+                "contributors_enabled": false,
+                "created_at": "Wed Nov 25 17:01:01 +0000 2009",
+                "default_profile": false,
+                "default_profile_image": false,
+                "description": "L'actualit\u00e9 \u00e9conomique, financi\u00e8re et boursi\u00e8re fran\u00e7aise et internationale.",
+                "entities": {
+                    "description": {
+                        "urls": []
+                    },
+                    "url": {
+                        "urls": [
+                            {
+                                "display_url": "lesechos.fr",
+                                "expanded_url": "http://www.lesechos.fr/",
+                                "indices": [
+                                    0,
+                                    23
+                                ],
+                                "url": "https://t.co/gixxFCrqR9"
+                            }
+                        ]
+                    }
+                },
+                "favourites_count": 315,
+                "follow_request_sent": null,
+                "followers_count": 1201595,
+                "following": null,
+                "friends_count": 508,
+                "geo_enabled": true,
+                "has_extended_profile": false,
+                "id": 92564226,
+                "id_str": "92564226",
+                "is_translation_enabled": false,
+                "is_translator": false,
+                "lang": null,
+                "listed_count": 7948,
+                "location": "Paris",
+                "name": "Les Echos",
+                "notifications": null,
+                "profile_background_color": "EBEBEB",
+                "profile_background_image_url": "http://abs.twimg.com/images/themes/theme1/bg.png",
+                "profile_background_image_url_https": "https://abs.twimg.com/images/themes/theme1/bg.png",
+                "profile_background_tile": false,
+                "profile_image_url": "http://pbs.twimg.com/profile_images/917735975119441920/Otcve69W_normal.jpg",
+                "profile_image_url_https": "https://pbs.twimg.com/profile_images/917735975119441920/Otcve69W_normal.jpg",
+                "profile_link_color": "B01415",
+                "profile_sidebar_border_color": "FFFFFF",
+                "profile_sidebar_fill_color": "F3F3F3",
+                "profile_text_color": "333333",
+                "profile_use_background_image": false,
+                "protected": false,
+                "screen_name": "LesEchos",
+                "statuses_count": 387313,
+                "time_zone": null,
+                "translator_type": "none",
+                "url": "https://t.co/gixxFCrqR9",
+                "utc_offset": null,
+                "verified": true
+            }
+        },
+        "retweets": 3,
+        "text": "Transition \u00e9cologique : ce que peuvent faire les entreprises https://t.co/tjDSIK4BWv"
+    },
+    {
+        "created_at": 1570279969,
+        "favorites": 3,
+        "id": 1180465866837823489,
+        "language": "italian",
+        "original_screen_name": null,
+        "publisher": "Corriere",
+        "raw": {
+            "contributors": null,
+            "coordinates": null,
+            "created_at": "Sat Oct 05 12:52:49 +0000 2019",
+            "entities": {
+                "hashtags": [],
+                "symbols": [],
+                "urls": [
+                    {
+                        "display_url": "trib.al/8QUGfMq",
+                        "expanded_url": "https://trib.al/8QUGfMq",
+                        "indices": [
+                            67,
+                            90
+                        ],
+                        "url": "https://t.co/auylFXQ7Mc"
+                    }
+                ],
+                "user_mentions": []
+            },
+            "favorite_count": 3,
+            "favorited": false,
+            "geo": null,
+            "id": 1180465866837823489,
+            "id_str": "1180465866837823489",
+            "in_reply_to_screen_name": null,
+            "in_reply_to_status_id": null,
+            "in_reply_to_status_id_str": null,
+            "in_reply_to_user_id": null,
+            "in_reply_to_user_id_str": null,
+            "is_quote_status": false,
+            "lang": "it",
+            "place": null,
+            "possibly_sensitive": false,
+            "retweet_count": 2,
+            "retweeted": false,
+            "source": "<a href=\"http://www.socialflow.com\" rel=\"nofollow\">SocialFlow</a>",
+            "text": "C\u2019\u00e8 una falla su WhatsApp, Gif a rischio: bisogna aggiornare l'app https://t.co/auylFXQ7Mc",
+            "truncated": false,
+            "user": {
+                "contributors_enabled": false,
+                "created_at": "Fri Oct 21 10:00:47 +0000 2011",
+                "default_profile": false,
+                "default_profile_image": false,
+                "description": "L'informazione in 280 caratteri, 7 giorni su 7. Anche su Instagram \ud83d\udc49 : https://t.co/DAPcdOsTiF",
+                "entities": {
+                    "description": {
+                        "urls": [
+                            {
+                                "display_url": "instagram.com/corriere/",
+                                "expanded_url": "https://www.instagram.com/corriere/",
+                                "indices": [
+                                    71,
+                                    94
+                                ],
+                                "url": "https://t.co/DAPcdOsTiF"
+                            }
+                        ]
+                    }
+                },
+                "favourites_count": 4953,
+                "follow_request_sent": null,
+                "followers_count": 2153367,
+                "following": null,
+                "friends_count": 252,
+                "geo_enabled": true,
+                "has_extended_profile": false,
+                "id": 395218906,
+                "id_str": "395218906",
+                "is_translation_enabled": true,
+                "is_translator": false,
+                "lang": null,
+                "listed_count": 7726,
+                "location": "Milano",
+                "name": "Corriere della Sera",
+                "notifications": null,
+                "profile_background_color": "EBEBEB",
+                "profile_background_image_url": "http://abs.twimg.com/images/themes/theme1/bg.png",
+                "profile_background_image_url_https": "https://abs.twimg.com/images/themes/theme1/bg.png",
+                "profile_background_tile": false,
+                "profile_banner_url": "https://pbs.twimg.com/profile_banners/395218906/1569232527",
+                "profile_image_url": "http://pbs.twimg.com/profile_images/844239421696368640/8du2P_fp_normal.jpg",
+                "profile_image_url_https": "https://pbs.twimg.com/profile_images/844239421696368640/8du2P_fp_normal.jpg",
+                "profile_link_color": "4F48B0",
+                "profile_sidebar_border_color": "FFFFFF",
+                "profile_sidebar_fill_color": "F3F3F3",
+                "profile_text_color": "25262E",
+                "profile_use_background_image": true,
+                "protected": false,
+                "screen_name": "Corriere",
+                "statuses_count": 353005,
+                "time_zone": null,
+                "translator_type": "none",
+                "url": null,
+                "utc_offset": null,
+                "verified": true
+            }
+        },
+        "retweets": 2,
+        "text": "C\u2019\u00e8 una falla su WhatsApp, Gif a rischio: bisogna aggiornare l'app https://t.co/auylFXQ7Mc"
+    },
+    {
+        "created_at": 1570256421,
+        "favorites": 5,
+        "id": 1180367099128139776,
+        "language": "italian",
+        "original_screen_name": null,
+        "publisher": "LaStampa",
+        "raw": {
+            "contributors": null,
+            "coordinates": null,
+            "created_at": "Sat Oct 05 06:20:21 +0000 2019",
+            "entities": {
+                "hashtags": [
+                    {
+                        "indices": [
+                            24,
+                            35
+                        ],
+                        "text": "Buongiorno"
+                    },
+                    {
+                        "indices": [
+                            57,
+                            66
+                        ],
+                        "text": "5ottobre"
+                    },
+                    {
+                        "indices": [
+                            94,
+                            102
+                        ],
+                        "text": "topnews"
+                    }
+                ],
+                "symbols": [],
+                "urls": [
+                    {
+                        "display_url": "twitter.com/i/web/status/1\u2026",
+                        "expanded_url": "https://twitter.com/i/web/status/1180367099128139776",
+                        "indices": [
+                            104,
+                            127
+                        ],
+                        "url": "https://t.co/nTq4TSJ8AU"
+                    }
+                ],
+                "user_mentions": [
+                    {
+                        "id": 482897816,
+                        "id_str": "482897816",
+                        "indices": [
+                            39,
+                            52
+                        ],
+                        "name": "mattia feltri",
+                        "screen_name": "mattiafeltri"
+                    }
+                ]
+            },
+            "favorite_count": 5,
+            "favorited": false,
+            "geo": null,
+            "id": 1180367099128139776,
+            "id_str": "1180367099128139776",
+            "in_reply_to_screen_name": null,
+            "in_reply_to_status_id": null,
+            "in_reply_to_status_id_str": null,
+            "in_reply_to_user_id": null,
+            "in_reply_to_user_id_str": null,
+            "is_quote_status": false,
+            "lang": "it",
+            "place": {
+                "attributes": {},
+                "bounding_box": {
+                    "coordinates": [
+                        [
+                            [
+                                7.5779802,
+                                45.0055411
+                            ],
+                            [
+                                7.7735908,
+                                45.0055411
+                            ],
+                            [
+                                7.7735908,
+                                45.1402043
+                            ],
+                            [
+                                7.5779802,
+                                45.1402043
+                            ]
+                        ]
+                    ],
+                    "type": "Polygon"
+                },
+                "contained_within": [],
+                "country": "Italie",
+                "country_code": "IT",
+                "full_name": "Turin, Pi\u00e9mont",
+                "id": "419060023b8455e1",
+                "name": "Turin",
+                "place_type": "city",
+                "url": "https://api.twitter.com/1.1/geo/id/419060023b8455e1.json"
+            },
+            "possibly_sensitive": false,
+            "retweet_count": 3,
+            "retweeted": false,
+            "source": "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+            "text": "\ud83c\udfa7 Italiani assoluti, il #Buongiorno di @mattiafeltri del #5ottobre ora si pu\u00f2 anche ascoltare #topnews\u2026 https://t.co/nTq4TSJ8AU",
+            "truncated": true,
+            "user": {
+                "contributors_enabled": false,
+                "created_at": "Tue Apr 07 09:31:23 +0000 2009",
+                "default_profile": false,
+                "default_profile_image": false,
+                "description": "Notizie, inchieste, analisi e breaking news. RT dei nostri giornalisti e lettori",
+                "entities": {
+                    "description": {
+                        "urls": []
+                    },
+                    "url": {
+                        "urls": [
+                            {
+                                "display_url": "lastampa.it",
+                                "expanded_url": "http://www.lastampa.it",
+                                "indices": [
+                                    0,
+                                    23
+                                ],
+                                "url": "https://t.co/DqTQs84xqS"
+                            }
+                        ]
+                    }
+                },
+                "favourites_count": 1523,
+                "follow_request_sent": null,
+                "followers_count": 1056902,
+                "following": null,
+                "friends_count": 378,
+                "geo_enabled": true,
+                "has_extended_profile": false,
+                "id": 29416653,
+                "id_str": "29416653",
+                "is_translation_enabled": true,
+                "is_translator": false,
+                "lang": null,
+                "listed_count": 6335,
+                "location": "Torino, Piemonte",
+                "name": "La Stampa",
+                "notifications": null,
+                "profile_background_color": "FFFFFF",
+                "profile_background_image_url": "http://abs.twimg.com/images/themes/theme1/bg.png",
+                "profile_background_image_url_https": "https://abs.twimg.com/images/themes/theme1/bg.png",
+                "profile_background_tile": false,
+                "profile_banner_url": "https://pbs.twimg.com/profile_banners/29416653/1516478172",
+                "profile_image_url": "http://pbs.twimg.com/profile_images/1145280231089037314/G6vSIv1z_normal.jpg",
+                "profile_image_url_https": "https://pbs.twimg.com/profile_images/1145280231089037314/G6vSIv1z_normal.jpg",
+                "profile_link_color": "738EBE",
+                "profile_sidebar_border_color": "FFFFFF",
+                "profile_sidebar_fill_color": "F7FCFF",
+                "profile_text_color": "5C5C5C",
+                "profile_use_background_image": true,
+                "protected": false,
+                "screen_name": "LaStampa",
+                "statuses_count": 390135,
+                "time_zone": null,
+                "translator_type": "none",
+                "url": "https://t.co/DqTQs84xqS",
+                "utc_offset": null,
+                "verified": true
+            }
+        },
+        "retweets": 3,
+        "text": "\ud83c\udfa7 Italiani assoluti, il #Buongiorno di @mattiafeltri del #5ottobre ora si pu\u00f2 anche ascoltare #topnews\u2026 https://t.co/nTq4TSJ8AU"
+    },
+    {
+        "created_at": 1570261300,
+        "favorites": 102,
+        "id": 1180387564181700608,
+        "language": "french",
+        "original_screen_name": null,
+        "publisher": "Qofficiel",
+        "raw": {
+            "contributors": null,
+            "coordinates": null,
+            "created_at": "Sat Oct 05 07:41:40 +0000 2019",
+            "entities": {
+                "hashtags": [],
+                "symbols": [],
+                "urls": [
+                    {
+                        "display_url": "twitter.com/i/web/status/1\u2026",
+                        "expanded_url": "https://twitter.com/i/web/status/1180387564181700608",
+                        "indices": [
+                            115,
+                            138
+                        ],
+                        "url": "https://t.co/hvWkLUDMQM"
+                    }
+                ],
+                "user_mentions": []
+            },
+            "favorite_count": 102,
+            "favorited": false,
+            "geo": null,
+            "id": 1180387564181700608,
+            "id_str": "1180387564181700608",
+            "in_reply_to_screen_name": null,
+            "in_reply_to_status_id": null,
+            "in_reply_to_status_id_str": null,
+            "in_reply_to_user_id": null,
+            "in_reply_to_user_id_str": null,
+            "is_quote_status": false,
+            "lang": "fr",
+            "place": null,
+            "possibly_sensitive": false,
+            "retweet_count": 12,
+            "retweeted": false,
+            "source": "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+            "text": "\ud83d\udccdQuotidien, \u00e7a continue aussi le week-end. Pour voir ou revoir l\u2019\u00e9mission d\u2019hier, \u00e7a se passe juste en dessous \u2935\ufe0f\u2026 https://t.co/hvWkLUDMQM",
+            "truncated": true,
+            "user": {
+                "contributors_enabled": false,
+                "created_at": "Thu Jun 16 13:16:30 +0000 2016",
+                "default_profile": true,
+                "default_profile_image": false,
+                "description": "Compte officiel de l'\u00e9mission #Quotidien pr\u00e9sent\u00e9e par Yann Barth\u00e8s, diffus\u00e9e du lundi au vendredi \u00e0 19H25 sur TMC !",
+                "entities": {
+                    "description": {
+                        "urls": []
+                    },
+                    "url": {
+                        "urls": [
+                            {
+                                "display_url": "tf1.fr/tmc/quotidien-\u2026",
+                                "expanded_url": "http://www.tf1.fr/tmc/quotidien-avec-yann-barthes",
+                                "indices": [
+                                    0,
+                                    23
+                                ],
+                                "url": "https://t.co/KzhyNFPKWF"
+                            }
+                        ]
+                    }
+                },
+                "favourites_count": 751,
+                "follow_request_sent": null,
+                "followers_count": 552279,
+                "following": null,
+                "friends_count": 615,
+                "geo_enabled": true,
+                "has_extended_profile": false,
+                "id": 743432061088899073,
+                "id_str": "743432061088899073",
+                "is_translation_enabled": false,
+                "is_translator": false,
+                "lang": null,
+                "listed_count": 2208,
+                "location": "",
+                "name": "Quotidien",
+                "notifications": null,
+                "profile_background_color": "F5F8FA",
+                "profile_background_image_url": null,
+                "profile_background_image_url_https": null,
+                "profile_background_tile": false,
+                "profile_banner_url": "https://pbs.twimg.com/profile_banners/743432061088899073/1536242935",
+                "profile_image_url": "http://pbs.twimg.com/profile_images/1179406686957768705/brVH9qct_normal.jpg",
+                "profile_image_url_https": "https://pbs.twimg.com/profile_images/1179406686957768705/brVH9qct_normal.jpg",
+                "profile_link_color": "1DA1F2",
+                "profile_sidebar_border_color": "C0DEED",
+                "profile_sidebar_fill_color": "DDEEF6",
+                "profile_text_color": "333333",
+                "profile_use_background_image": true,
+                "protected": false,
+                "screen_name": "Qofficiel",
+                "statuses_count": 10997,
+                "time_zone": null,
+                "translator_type": "none",
+                "url": "https://t.co/KzhyNFPKWF",
+                "utc_offset": null,
+                "verified": true
+            }
+        },
+        "retweets": 12,
+        "text": "\ud83d\udccdQuotidien, \u00e7a continue aussi le week-end. Pour voir ou revoir l\u2019\u00e9mission d\u2019hier, \u00e7a se passe juste en dessous \u2935\ufe0f\u2026 https://t.co/hvWkLUDMQM"
+    }
+]
