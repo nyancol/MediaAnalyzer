@@ -54,7 +54,7 @@ spec:
       containers:
       - name: process
         image: media-analyzer
-        args: ["process", "--postgres-ip", "192.168.39.1"]
+        args: ["process"]
         imagePullPolicy: Never
 ---
 apiVersion: apps/v1

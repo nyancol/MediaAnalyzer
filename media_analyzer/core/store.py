@@ -2,6 +2,9 @@ import argparse
 import json
 import pickle
 import psycopg2.errors
+from fastavro import reader, parse_schema
+from pathlib import Path
+import io
 
 from media_analyzer import database
 from media_analyzer import queue
@@ -10,6 +13,11 @@ from media_analyzer import exceptions
 
 def store(rabbit_ip="localhost", postgres_ip="localhost", batch_size=100):
     records = []
+
+    schema_file = Path(__file__).parent / "tweet.avsc"
+    with open(schema_file) as f:
+        raw_schema = json.load(f)
+    schema = parse_schema(raw_schema)
 
     def insert_records(db_conn, records):
         # except exceptions.DuplicateDBEntryException as err:
@@ -27,9 +35,11 @@ def store(rabbit_ip="localhost", postgres_ip="localhost", batch_size=100):
         db_conn.commit()
 
     def callback(chn, method, properties, body):
-        record = pickle.loads(body)
-        record["raw"] = json.dumps(record["raw"])
-        records.append(record)
+        stream = io.BytesIO(body)
+        for tweet in reader(stream, schema):
+            records.append(process_tweet(tweet, postgres_ip))
+        stream.close()
+
         if len(records) >= batch_size:
             print(f"Inserting {len(records)} records")
             with database.connection(postgres_ip) as db_conn:
@@ -43,6 +53,38 @@ def store(rabbit_ip="localhost", postgres_ip="localhost", batch_size=100):
         channel.queue_bind("records_db", "records_router")
         channel.basic_consume(queue="records_db", on_message_callback=callback)
         channel.start_consuming()
+
+### TODO: should it be moved to a Reddis DB? Overkill. Maybe reddis also for keeping MAX(ID). Partition tweets table on 'publishers'?
+### TODO: Benchmark this query
+def get_language(publisher, host="localhost"):
+    with database.connection(host) as conn:
+        cur = conn.cursor()
+        cur.execute(f"""SELECT language
+                        FROM publishers
+                        WHERE screen_name = '{publisher}';
+                     """)
+        language = cur.fetchone()[0]
+        cur.close()
+    return language
+
+
+
+def process_tweet(tweet, postgres_ip="localhost"):
+    record = {
+             "id": tweet["id"],
+             "created_at": tweet["created_at"],
+             "text": tweet["text"],
+             "raw": json.dumps(tweet),
+             "publisher": tweet["user"]["screen_name"],
+             "retweets": tweet["retweet_count"],
+             "favorites": tweet["favorite_count"],
+             "language": get_language(tweet["user"]["screen_name"], postgres_ip),
+             "original_screen_name": None,
+            }
+
+    if "retweeted_status" in tweet:
+        record["original_screen_name"] = tweet["retweeted_status"]["user"]["screen_name"]
+    return record
 
 
 def main():

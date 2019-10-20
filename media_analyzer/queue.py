@@ -28,16 +28,24 @@ def init_queues():
     with connection() as conn:
         channel = conn.channel()
         channel.queue_declare(queue="tweets", durable=True)
-        channel.queue_declare(queue="records", durable=True)
+        channel.queue_declare(queue="records_db", durable=True)
+        channel.queue_declare(queue="records_datalake", durable=True)
         channel.queue_declare(queue="publishers", durable=True)
+
+        channel.exchange_declare("records_router", "fanout")
+        channel.queue_bind("records_db", "records_router")
+        channel.queue_bind("records_datalake", "records_router")
 
 
 def delete_queues():
     with connection() as conn:
         channel = conn.channel()
         channel.queue_delete(queue="tweets")
-        channel.queue_delete(queue="records")
+        channel.queue_delete(queue="records_db")
+        channel.queue_delete(queue="records_datalake")
         channel.queue_delete(queue="publishers")
+
+        channel.exchange_delete("records_router")
 
 
 if __name__ == "__main__":

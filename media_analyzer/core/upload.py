@@ -3,7 +3,7 @@ import pickle
 from uuid import uuid4
 import io
 import psycopg2.errors
-from fastavro import writer, parse_schema
+from fastavro import writer, reader, parse_schema
 import json
 from functools import partial
 from datetime import datetime
@@ -28,11 +28,14 @@ def upload(rabbit_ip="localhost", batch_size=100):
         stream.seek(0)
         file_name = datetime.now().strftime('%Y%m-%d%H-%M%S-') + str(uuid4()) + ".avro"
         bucket.upload_fileobj(stream, file_name)
+        stream.close()
 
     def callback(chn, method, properties, body):
-        record = pickle.loads(body)
-        record["created_at"] = int(record["created_at"].timestamp())
-        records.append(record)
+        stream = io.BytesIO(body)
+        for tweet in reader(stream, schema):
+            records.append(tweet)
+        stream.close()
+
         if len(records) >= batch_size:
             print(f"Inserting {len(records)} records")
             upload_records(records)
